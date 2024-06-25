@@ -1,14 +1,14 @@
 package com.kdg.api.mapper.board;
 
-
-import com.kdg.api.model.board.BoardList;
+import com.kdg.api.model.board.Board;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface BoardMapper {
+public interface CommunityBoardMapper {
 
-    List<BoardList> selectBoardList(@Param("page") int page);
+    List<Board> selectBoardList(@Param("page") int page);
+
 }

@@ -1,19 +1,22 @@
 package com.kdg.api.service.board;
 
-import com.kdg.api.mapper.board.BoardMapper;
-import com.kdg.api.model.board.BoardList;
+import com.kdg.api.mapper.board.CommunityBoardMapper;
+import com.kdg.api.model.board.Board;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommunityBoardService {
 
-    private  final BoardMapper boardMapper;
+    private final CommunityBoardMapper communityBoardMapper;
 
     @Autowired
-    public CommunityBoardService(BoardMapper boardMapper) {this.boardMapper = boardMapper;}
+    public CommunityBoardService(CommunityBoardMapper communityBoardMapper){this.communityBoardMapper =communityBoardMapper; }
 
-    public List<BoardList> getboardList(int page) {
-        return boardMapper.selectBoardList(page);
+    public List<Board> getboardList(int page) {
+
+        return communityBoardMapper.selectBoardList(page);
     }
 }
