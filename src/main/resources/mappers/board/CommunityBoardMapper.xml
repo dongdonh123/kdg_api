@@ -5,23 +5,41 @@
 
 <mapper namespace="com.kdg.api.mapper.board.CommunityBoardMapper">
 
-    <resultMap id="BoardResultMap" type="com.kdg.api.model.board.Board">
-        <id property="id" column="id"/>
-        <result property="seq" column="seq"/>
-        <result property="object_id" column="object_id"/>
+    <resultMap id="BoardListResultMap" type="com.kdg.api.model.board.Board">
+        <id property="board_id" column="board_id"/>
+        <result property="class_id" column="class_id"/>
+        <result property="board_title" column="board_title"/>
+        <result property="board_contents" column="board_contents"/>
+        <result property="modify_dt" column="modify_dt"/>
+        <result property="modify_user" column="modify_user"/>
+        <result property="create_dt" column="create_dt"/>
+        <result property="create_user" column="create_user"/>
+    </resultMap>
+
+    <resultMap id="BoardPageInfoResultMap" type="com.kdg.api.model.board.MainBoard">
+        <id property="board_id" column="board_id"/>
+        <result property="class_id" column="class_id"/>
     </resultMap>
 
 
-    <select id="selectBoardList" resultMap="BoardResultMap">
+    <select id="selectBoardList" resultMap="BoardListResultMap">
+        SELECT
+            board_id,
+            class_id,
+            board_title,
+            board_contents,
+            modify_dt,
+            modify_user,
+            create_dt,
+            create_user
+        FROM kdh.tb_board tb
+        ORDER BY create_dt
+        OFFSET #{page_no} LIMIT #{page_cnt};
+    </select>
+
+    <select id="selectBoardPageInfo" resultMap="BoardPageInfoResultMap">
         select
-        board_id
-        ,ROW_NUMBER() OVER (ORDER BY board_id) AS seq
-        , (SELECT CEILING(COUNT(*)::numeric / 10) AS total_pages FROM kdh.tb_board ) as total_page
-        ,#{page} as page
-        FROM kdh.tb_board
-        where 1=1
-        order by board_id
-        LIMIT 10
-        OFFSET (#{page} - 1) * 10;
+        count(*)/ #{page_cnt} +1 as class_id
+        from kdh.tb_board tb ;
     </select>
 </mapper>

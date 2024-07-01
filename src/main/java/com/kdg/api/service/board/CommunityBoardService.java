@@ -15,8 +15,14 @@ public class CommunityBoardService {
     @Autowired
     public CommunityBoardService(CommunityBoardMapper communityBoardMapper){this.communityBoardMapper =communityBoardMapper; }
 
-    public List<Board> getboardList(int page) {
+    public List<Board> getboardList(int page_no,int page_cnt) {
 
-        return communityBoardMapper.selectBoardList(page);
+        return communityBoardMapper.selectBoardList(page_no, page_cnt);
     }
+
+    public List<Board> getboardpageInfoList(int page_cnt) {
+
+        return communityBoardMapper.selectBoardPageInfo(page_cnt);
+    }
+
 }

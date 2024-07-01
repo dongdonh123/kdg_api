@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface CommunityBoardMapper {
 
-    List<Board> selectBoardList(@Param("page") int page);
+    List<Board> selectBoardList(@Param("page_no") int page_no , @Param("page_cnt") int page_cnt);
+
+    List<Board> selectBoardPageInfo(@Param("page_cnt") int page_cnt);
 
 }
