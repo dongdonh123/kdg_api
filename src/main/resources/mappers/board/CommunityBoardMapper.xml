@@ -14,12 +14,11 @@
         <result property="modify_user" column="modify_user"/>
         <result property="create_dt" column="create_dt"/>
         <result property="create_user" column="create_user"/>
+        <result property="row_count" column="row_count"/>
+        <result property="total_page" column="total_page"/>
     </resultMap>
 
-    <resultMap id="BoardPageInfoResultMap" type="com.kdg.api.model.board.MainBoard">
-        <id property="board_id" column="board_id"/>
-        <result property="class_id" column="class_id"/>
-    </resultMap>
+
 
 
     <select id="selectBoardList" resultMap="BoardListResultMap">
@@ -37,9 +36,10 @@
         OFFSET #{page_no} LIMIT #{page_cnt};
     </select>
 
-    <select id="selectBoardPageInfo" resultMap="BoardPageInfoResultMap">
+    <select id="selectBoardPageInfo" resultMap="BoardListResultMap">
         select
-        count(*)/ #{page_cnt} +1 as class_id
+            count(*) as row_count,
+            count(*)/ #{page_cnt} +1 as total_page
         from kdh.tb_board tb ;
     </select>
 </mapper>
