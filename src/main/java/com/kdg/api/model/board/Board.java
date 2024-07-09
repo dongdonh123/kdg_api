@@ -13,15 +13,12 @@ public class Board {
     private Date create_dt;
     private String create_user;
 
-    private int total_page;
-    private int row_count;
-
     // 기본 생성자
     public Board() {
     }
 
     // 생성자
-    public Board(int board_id, int class_id, String board_title, String board_contents, Date modify_dt, String modify_user, Date create_dt, String create_user, int total_page, int row_count) {
+    public Board(int board_id, int class_id, String board_title, String board_contents, Date modify_dt, String modify_user, Date create_dt, String create_user) {
         this.board_id = board_id;
         this.class_id = class_id;
         this.board_title = board_title;
@@ -30,8 +27,6 @@ public class Board {
         this.modify_user = modify_user;
         this.create_dt = create_dt;
         this.create_user = create_user;
-        this.total_page = total_page;
-        this.row_count = row_count;
     }
 
     // Getter & Setter
@@ -98,11 +93,6 @@ public class Board {
     }
 
 
-    public int getTotal_page(){return total_page;}
-    public void setTotal_page(int totalPage){this.total_page = totalPage;}
-
-    public int getRow_count(){return row_count;}
-    public void setRow_count(int row_count){this.row_count = row_count;}
 
 
 }
