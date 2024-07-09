@@ -16,9 +16,9 @@
         <result property="create_user" column="create_user"/>
     </resultMap>
 
-    <resultMap id="BoardPageInfoResultMap" type="com.kdg.api.model.board.MainBoard">
-        <id property="board_id" column="board_id"/>
-        <result property="class_id" column="class_id"/>
+    <resultMap id="BoardOtherInformationMap" type="com.kdg.api.model.otherInformation.OtherInformation">
+        <id property="total_row" column="total_row"/>
+        <result property="max_page_no" column="max_page_no"/>
     </resultMap>
 
 
@@ -37,9 +37,10 @@
         OFFSET #{page_no} LIMIT #{page_cnt};
     </select>
 
-    <select id="selectBoardPageInfo" resultMap="BoardPageInfoResultMap">
+    <select id="selectOtherInformation" resultMap="BoardOtherInformationMap">
         select
-        count(*)/ #{page_cnt} +1 as class_id
+            count(*) as total_row,
+            count(*)/ #{page_cnt} as max_page_no
         from kdh.tb_board tb ;
     </select>
 </mapper>
