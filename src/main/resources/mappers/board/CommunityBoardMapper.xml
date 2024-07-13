@@ -50,4 +50,31 @@
             count(*)/ #{page_cnt} as max_page_no
         from kdh.tb_board
     </select>
+
+
+    <insert id="insertBoard"  parameterType="com.kdg.api.model.board.Board">
+        INSERT INTO kdh.tb_board
+        (board_id,
+        class_id,
+        board_title,
+        board_contents,
+        modify_dt,
+        modify_user,
+        create_dt,
+        create_user)
+        VALUES
+        ((SELECT COALESCE(MAX(board_id), 0) + 1 FROM kdh.tb_board),
+        1,
+        #{board_title},
+        #{board_contents},
+        NULL,
+        '',
+        NOW(),
+        '관리자킹동환');
+    </insert>
+
+
+
+
+
 </mapper>
