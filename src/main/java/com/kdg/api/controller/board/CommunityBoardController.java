@@ -24,19 +24,19 @@ public class CommunityBoardController {
 
         try {
             // 기타정보처리
-            OtherInformation otherInformation = communityBoardService.otherInformation(page_cnt);
-            otherInformation.setPage_no(page_no);
-            otherInformation.setPage_cnt(page_cnt);
+            OtherInformation otherInformation_ = communityBoardService.otherInformation(page_cnt);
+            otherInformation_.setPage_no(page_no);
+            otherInformation_.setPage_cnt(page_cnt);
 
             // 페이지된 게시판 리스트 가져오기
             page_no = page_no * page_cnt;
             List<Board> pagingBoardList = communityBoardService.getboardList(page_no, page_cnt);
-            otherInformation.setThis_page_row(pagingBoardList.size());
+            otherInformation_.setThis_page_row(pagingBoardList.size());
 
             // 응답 데이터 구성
             Object response = new Object() {
                 public final List<Board> boardList = pagingBoardList;
-                public final OtherInformation otherInformation_ = otherInformation;
+                public final OtherInformation otherInformation = otherInformation_;
             };
 
             return response;
