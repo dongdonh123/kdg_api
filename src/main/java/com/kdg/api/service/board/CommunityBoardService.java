@@ -35,15 +35,29 @@ public class CommunityBoardService {
 
     //게시판 수정
     public void updateBoard(Long boardId, Board board) {
-        // 게시판id가 있는지 봐서 id가 없으면 board아이디가 없다고 해라
-        Board existingBoard = communityBoardMapper.findBoardById(boardId);
-        if (existingBoard == null) {
-            throw new RuntimeException("Board not found with id: " + boardId);
+        if (communityBoardMapper.findBoardId(boardId) == null) {
+            throw new IllegalArgumentException("게시글을 찾을 수 없습니다. ID: " + boardId);
         }
-        // 게시판id가 맞지만 수정하려는거가 맞는지 확인해라 (id만 안다고 처리하면 안됨)
-        board.setId(boardId);
-        boardMapper.updateBoard(board);
+        communityBoardMapper.updateBoard(board);
     }
+
+    //게시판 삭제
+    public void deleteBoard(Long boardId) {
+        if (communityBoardMapper.findBoardId(boardId) == null) {
+            throw new IllegalArgumentException("게시글을 찾을 수 없습니다. ID: " + boardId);
+        }
+        communityBoardMapper.deleteBoard(boardId);
+    }
+
+    //게시판 상세조회
+    public Board getBoardDetail(Long boardId) {
+        if (communityBoardMapper.findBoardId(boardId) == null) {
+            throw new IllegalArgumentException("게시글을 찾을 수 없습니다. ID: " + boardId);
+        }
+        return communityBoardMapper.getBoardDetail(boardId);
+    }
+
+
 
 
 

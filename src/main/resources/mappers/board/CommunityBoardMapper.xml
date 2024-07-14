@@ -24,10 +24,6 @@
         <result property="max_page_no" column="max_page_no"/>
     </resultMap>
 
-
-
-
-
     <select id="selectBoardList" resultMap="BoardListResultMap">
         SELECT
             board_id,
@@ -72,6 +68,54 @@
         NOW(),
         '관리자킹동환');
     </insert>
+
+    <select id="findBoardId" parameterType="long" resultType="long">
+        SELECT board_id
+        FROM kdh.tb_board
+        WHERE board_id = #{board_id}
+        and class_id = 1
+    </select>
+
+    <update id="updateBoard" parameterType="com.kdg.api.model.board.Board">
+        UPDATE kdh.tb_board
+        <set>
+            <if test="board_title != null">
+                board_title = #{board_title},
+            </if>
+            <if test="board_contents != null">
+                board_contents = #{board_contents},
+            </if>
+            modify_dt = now(),
+            modify_user = '마지막수정자'
+        </set>
+        WHERE board_id = #{board_id}
+        AND class_id = 1
+    </update>
+
+    <delete id="deleteBoard" parameterType="long">
+        DELETE FROM kdh.tb_board
+        WHERE board_id = #{board_id}
+        AND class_id = 1
+    </delete>
+
+    <select id="getBoardDetail" parameterType="long" resultMap="BoardListResultMap">
+        select
+            board_id,
+            class_id,
+            board_title,
+            board_contents,
+            modify_dt,
+            modify_user,
+            create_dt,
+            create_user
+        from kdh.tb_board
+        where class_id = 1
+        and board_id = #{board_id}
+    </select>
+
+
+
+
 
 
 

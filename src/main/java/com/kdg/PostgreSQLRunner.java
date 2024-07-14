@@ -23,8 +23,8 @@ public class PostgreSQLRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         try (Connection connection = dataSource.getConnection()){
             System.out.println(dataSource.getClass());
-            System.out.println(connection.getMetaData().getURL());
-            System.out.println(connection.getMetaData().getUserName());
+            System.out.println("접속정보 : " +connection.getMetaData().getURL());
+            System.out.println("접속유저 : " +connection.getMetaData().getUserName());
 
             Statement statement = connection.createStatement();
         }

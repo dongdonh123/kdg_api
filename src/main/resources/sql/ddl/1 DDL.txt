@@ -1,0 +1,23 @@
+
+CREATE TABLE kdh.kdh_login (
+	seq numeric NULL,
+	login_time timestamp NULL
+);
+
+CREATE TABLE kdh.tb_board (
+	board_id numeric NOT NULL,
+	class_id numeric NOT NULL,
+	board_title varchar(100) NULL,
+	board_contents varchar(100) NULL,
+	modify_dt timestamp NULL,
+	modify_user varchar(100) NULL,
+	create_dt timestamp NOT NULL,
+	create_user varchar(100) NOT NULL,
+	CONSTRAINT tb_board_pkey PRIMARY KEY (board_id)
+);
+
+CREATE TABLE kdh.tb_tbmaxid (
+	table_nm varchar(100) NULL,
+	table_max_id numeric NULL
+);
+
