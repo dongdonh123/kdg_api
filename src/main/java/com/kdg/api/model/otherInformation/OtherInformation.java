@@ -14,6 +14,10 @@ public class OtherInformation {
     private int total_row;
     //맥스 페이지 번호
     private int max_page_no;
+    //페이지 데이터 구간 최소
+    private int current_page_data_min;
+    //페이지 데이터 구간 최대
+    private int current_page_data_max;
 
     // 기본 생성자
     public OtherInformation() {
@@ -21,12 +25,14 @@ public class OtherInformation {
     }
 
     // 생성자
-    public OtherInformation(int page_no, int page_cnt, int this_page_row, int total_row, int max_page_no) {
+    public OtherInformation(int page_no, int page_cnt, int this_page_row, int total_row, int max_page_no,int current_page_data_min,int current_page_data_max) {
         this.page_no = page_no;
         this.page_cnt = page_cnt;
         this.this_page_row = this_page_row;
         this.total_row = total_row;
         this.max_page_no = max_page_no;
+        this.current_page_data_min = current_page_data_min;
+        this.current_page_data_max = current_page_data_max;
 
     }
 
@@ -68,5 +74,21 @@ public class OtherInformation {
 
     public void setMax_page_no(int max_page_no) {
         this.max_page_no = max_page_no;
+    }
+
+    public int getCurrent_page_data_min() {
+        return current_page_data_min;
+    }
+
+    public int getCurrent_page_data_max() {
+        return current_page_data_max;
+    }
+
+    public void setCurrent_page_data_min(int current_page_data_min) {
+        this.current_page_data_min = current_page_data_min;
+    }
+
+    public void setCurrent_page_data_max(int current_page_data_max) {
+        this.current_page_data_max = current_page_data_max;
     }
 }

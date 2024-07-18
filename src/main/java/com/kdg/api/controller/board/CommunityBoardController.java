@@ -27,9 +27,11 @@ public class CommunityBoardController {
             OtherInformation otherInformation_ = communityBoardService.otherInformation(page_cnt);
             otherInformation_.setPage_no(page_no);
             otherInformation_.setPage_cnt(page_cnt);
+            otherInformation_.setCurrent_page_data_min((page_no-1) * page_cnt +1);
+            otherInformation_.setCurrent_page_data_max(page_no * page_cnt);
 
             // 페이지된 게시판 리스트 가져오기
-            page_no = page_no * page_cnt;
+            page_no = (page_no-1) * page_cnt;
             List<Board> pagingBoardList = communityBoardService.getboardList(page_no, page_cnt);
             otherInformation_.setThis_page_row(pagingBoardList.size());
 

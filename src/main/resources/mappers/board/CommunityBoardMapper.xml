@@ -43,7 +43,7 @@
     <select id="selectOtherInformation" resultMap="BoardOtherInformationMap">
         select
             count(*) as total_row,
-            count(*)/ #{page_cnt} as max_page_no
+            count(*)/ #{page_cnt} +1 as max_page_no
         from kdh.tb_board
     </select>
 
