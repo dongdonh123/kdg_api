@@ -21,3 +21,18 @@ CREATE TABLE kdh.tb_tbmaxid (
 	table_max_id numeric NULL
 );
 
+CREATE TABLE kdh.tb_menu_mgt (
+	menu_id numeric NOT NULL,
+	menu_code varchar(100) NULL,
+	menu_name varchar(100) NULL,
+	menu_seq varchar(100) NULL,
+	org_menu_id numeric NULL,
+	use_yn varchar(1) NULL,
+	menu_url varchar(100) not NULL,
+	create_dt timestamp NOT NULL,
+	create_user varchar(100) NOT NULL,
+	modify_dt timestamp NULL,
+	modify_user varchar(100) NULL,
+	CONSTRAINT tb_menu_mgt_pkey PRIMARY KEY (menu_id)
+);
+

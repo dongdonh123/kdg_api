@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdg.api.mapper.admin.MenuMenegementMapper">
+
+    <resultMap id="MenuListResultMap" type="com.kdg.api.model.MenuDTO">
+        <id property="menu_id" column="menu_id"/>
+        <result property="menu_code" column="menu_code"/>
+        <result property="menu_name" column="menu_name"/>
+        <result property="menu_seq" column="menu_seq"/>
+        <result property="org_menu_id" column="org_menu_id"/>
+        <result property="use_yn" column="use_yn"/>
+        <result property="menu_url" column="menu_url"/>
+        <result property="create_dt" column="create_dt"/>
+        <result property="create_user" column="create_user"/>
+        <result property="modify_dt" column="modify_dt"/>
+        <result property="modify_user" column="modify_user"/>
+    </resultMap>
+
+    <select id="selectUpMenuList" resultMap="MenuListResultMap">
+        select
+        menu_id,
+        menu_name
+        from kdh.tb_menu_mgt
+        where org_menu_id ='0'
+        order by org_menu_id , menu_id ;
+    </select>
+
+    <select id="selectDownMenuList" resultMap="MenuListResultMap">
+        select
+        menu_id,
+        menu_name,
+        org_menu_id
+        from kdh.tb_menu_mgt
+        where org_menu_id !='0'
+        order by org_menu_id , menu_id ;
+    </select>
+
+
+</mapper>

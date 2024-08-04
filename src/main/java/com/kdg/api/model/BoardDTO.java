@@ -1,8 +1,8 @@
-package com.kdg.api.model.board;
+package com.kdg.api.model;
 
 import java.util.Date;
 
-public class Board {
+public class BoardDTO {
 
     private int board_id;
     private int class_id;
@@ -14,11 +14,11 @@ public class Board {
     private String create_user;
 
     // 기본 생성자
-    public Board() {
+    public BoardDTO() {
     }
 
     // 생성자
-    public Board(int board_id, int class_id, String board_title, String board_contents, Date modify_dt, String modify_user, Date create_dt, String create_user) {
+    public BoardDTO(int board_id, int class_id, String board_title, String board_contents, Date modify_dt, String modify_user, Date create_dt, String create_user) {
         this.board_id = board_id;
         this.class_id = class_id;
         this.board_title = board_title;

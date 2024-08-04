@@ -1,8 +1,8 @@
-package com.kdg.api.model.otherInformation;
+package com.kdg.api.model;
 
 
 
-public class OtherInformation {
+public class OtherInformationDTO {
 
     // 페이지번호
     private int page_no;
@@ -20,12 +20,12 @@ public class OtherInformation {
     private int current_page_data_max;
 
     // 기본 생성자
-    public OtherInformation() {
+    public OtherInformationDTO() {
 
     }
 
     // 생성자
-    public OtherInformation(int page_no, int page_cnt, int this_page_row, int total_row, int max_page_no,int current_page_data_min,int current_page_data_max) {
+    public OtherInformationDTO(int page_no, int page_cnt, int this_page_row, int total_row, int max_page_no, int current_page_data_min, int current_page_data_max) {
         this.page_no = page_no;
         this.page_cnt = page_cnt;
         this.this_page_row = this_page_row;

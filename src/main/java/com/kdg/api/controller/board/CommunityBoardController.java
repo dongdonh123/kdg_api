@@ -1,14 +1,14 @@
 package com.kdg.api.controller.board;
 
-import com.kdg.api.model.board.Board;
-import com.kdg.api.model.otherInformation.OtherInformation;
+import com.kdg.api.model.BoardDTO;
+import com.kdg.api.model.OtherInformationDTO;
 import com.kdg.api.service.board.CommunityBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/board")
 public class CommunityBoardController {
@@ -24,21 +24,21 @@ public class CommunityBoardController {
 
         try {
             // 기타정보처리
-            OtherInformation otherInformation_ = communityBoardService.otherInformation(page_cnt);
-            otherInformation_.setPage_no(page_no);
-            otherInformation_.setPage_cnt(page_cnt);
-            otherInformation_.setCurrent_page_data_min((page_no-1) * page_cnt +1);
-            otherInformation_.setCurrent_page_data_max(page_no * page_cnt);
+            OtherInformationDTO otherInformation_DTO_ = communityBoardService.otherInformation(page_cnt);
+            otherInformation_DTO_.setPage_no(page_no);
+            otherInformation_DTO_.setPage_cnt(page_cnt);
+            otherInformation_DTO_.setCurrent_page_data_min((page_no-1) * page_cnt +1);
+            otherInformation_DTO_.setCurrent_page_data_max(page_no * page_cnt);
 
             // 페이지된 게시판 리스트 가져오기
             page_no = (page_no-1) * page_cnt;
-            List<Board> pagingBoardList = communityBoardService.getboardList(page_no, page_cnt);
-            otherInformation_.setThis_page_row(pagingBoardList.size());
+            List<BoardDTO> pagingBoardDTOList = communityBoardService.getboardList(page_no, page_cnt);
+            otherInformation_DTO_.setThis_page_row(pagingBoardDTOList.size());
 
             // 응답 데이터 구성
             Object response = new Object() {
-                public final List<Board> boardList = pagingBoardList;
-                public final OtherInformation otherInformation = otherInformation_;
+                public final List<BoardDTO> boardList = pagingBoardDTOList;
+                public final OtherInformationDTO otherInformation = otherInformation_DTO_;
             };
 
             return response;
@@ -54,10 +54,10 @@ public class CommunityBoardController {
 
     //게시판 신규
     @PostMapping
-    public ResponseEntity<String> insertBoard(@RequestBody Board board){
+    public ResponseEntity<String> insertBoard(@RequestBody BoardDTO boardDTO){
         try {
             // 게시판 정보 저장
-            communityBoardService.insertBoard(board);
+            communityBoardService.insertBoard(boardDTO);
             return new ResponseEntity<>("게시글 저장 성공", HttpStatus.CREATED);
         } catch (Exception e) {
             // 오류 발생 시 응답
@@ -67,10 +67,10 @@ public class CommunityBoardController {
 
     //게시판 수정
     @PutMapping("/{board_id}")
-    public ResponseEntity<String> updateBoard(@PathVariable("board_id") Long boardId, @RequestBody Board board) {
+    public ResponseEntity<String> updateBoard(@PathVariable("board_id") Long boardId, @RequestBody BoardDTO boardDTO) {
         try {
             // 게시판 정보 수정
-            communityBoardService.updateBoard(boardId, board);
+            communityBoardService.updateBoard(boardId, boardDTO);
             return new ResponseEntity<>("게시글 수정 성공", HttpStatus.OK);
         } catch (Exception e) {
             // 오류 발생 시 응답
@@ -93,11 +93,11 @@ public class CommunityBoardController {
     @GetMapping("/{board_id}")
     public Object getboardDetail(@PathVariable("board_id") Long boardId){
         try {
-            Board boardDetail = communityBoardService.getBoardDetail(boardId);
+            BoardDTO boardDTODetail = communityBoardService.getBoardDetail(boardId);
 
             // 응답 데이터 구성
             Object response = new Object() {
-                public final Board boardList = boardDetail;
+                public final BoardDTO boardList = boardDTODetail;
             };
             return response;
 

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kdg.api.mapper.board.CommunityBoardMapper">
 
-    <resultMap id="BoardListResultMap" type="com.kdg.api.model.board.Board">
+    <resultMap id="BoardListResultMap" type="com.kdg.api.model.BoardDTO">
         <id property="board_id" column="board_id"/>
         <result property="class_id" column="class_id"/>
         <result property="board_title" column="board_title"/>
@@ -19,7 +19,7 @@
     </resultMap>
 
 
-    <resultMap id="BoardOtherInformationMap" type="com.kdg.api.model.otherInformation.OtherInformation">
+    <resultMap id="BoardOtherInformationMap" type="com.kdg.api.model.OtherInformationDTO">
         <id property="total_row" column="total_row"/>
         <result property="max_page_no" column="max_page_no"/>
     </resultMap>
@@ -48,7 +48,7 @@
     </select>
 
 
-    <insert id="insertBoard"  parameterType="com.kdg.api.model.board.Board">
+    <insert id="insertBoard"  parameterType="com.kdg.api.model.BoardDTO">
         INSERT INTO kdh.tb_board
         (board_id,
         class_id,
@@ -76,7 +76,7 @@
         and class_id = 1
     </select>
 
-    <update id="updateBoard" parameterType="com.kdg.api.model.board.Board">
+    <update id="updateBoard" parameterType="com.kdg.api.model.BoardDTO">
         UPDATE kdh.tb_board
         <set>
             <if test="board_title != null">
