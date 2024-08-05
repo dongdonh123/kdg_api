@@ -1,13 +1,14 @@
 package com.kdg.api.controller.admin;
 
 
+import com.kdg.api.model.BoardDTO;
 import com.kdg.api.model.MenuDTO;
 import com.kdg.api.model.MenuTreeDTO;
 import com.kdg.api.service.admin.MenuMenegementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,4 +62,31 @@ public class MenuMenegementController {
             };
         }
     }
+
+    //신규등록
+    @PostMapping
+    public ResponseEntity<String> insertMenuData(@RequestBody MenuDTO menuDTO){
+        try {
+            System.out.println("zzz");
+            // 메뉴데이터 저장
+            menuMenegementService.insertMenuData(menuDTO);
+            return new ResponseEntity<>("메뉴관리 저장 성공", HttpStatus.CREATED);
+        } catch (Exception e) {
+            // 오류 발생 시 응답
+            return new ResponseEntity<>("메뉴관리 저장 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //삭제
+    @DeleteMapping("/{menu_id}")
+    public ResponseEntity<String> deleteMenuData(@PathVariable("menu_id") Long menu_id) {
+        try {
+            menuMenegementService.deleteMenuData(menu_id);
+            return new ResponseEntity<>("게시글 삭제 성공", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("게시글 삭제 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

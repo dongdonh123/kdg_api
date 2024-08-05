@@ -26,4 +26,16 @@ public class MenuMenegementService {
         return menuMenegementMapper.selectDownMenuList();
     }
 
+    //신규
+    public void insertMenuData(MenuDTO menuDTO) {menuMenegementMapper.insertMenuData(menuDTO);
+    }
+
+    //삭제
+    public void deleteMenuData(Long boardId) {
+        if (menuMenegementMapper.findMenuId(boardId) == null) {
+            throw new IllegalArgumentException("메뉴ID를 찾을 수 없습니다. ID: " + boardId);
+        }
+        menuMenegementMapper.deleteMenuData(boardId);
+    }
+
 }

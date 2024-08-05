@@ -38,5 +38,28 @@
         order by org_menu_id , menu_id ;
     </select>
 
+    <insert id="insertMenuData"  parameterType="com.kdg.api.model.MenuDTO">
+        INSERT INTO kdh.tb_menu_mgt
+        (menu_id,
+        menu_code,
+        menu_name,
+        menu_seq,
+        org_menu_id,
+        use_yn,
+        menu_url,
+        create_dt,
+        create_user)
+        VALUES
+        ((SELECT COALESCE(MAX(menu_id), 0) + 1 FROM kdh.tb_menu_mgt),
+        #{menu_code},
+        #{menu_name},
+        #{menu_seq},
+        #{org_menu_id},
+        #{use_yn},
+        #{menu_url},
+        NOW(),
+        '관리자킹동환');
+    </insert>
+
 
 </mapper>
