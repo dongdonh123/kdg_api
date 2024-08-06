@@ -25,4 +25,7 @@ public interface MenuMenegementMapper {
     //메뉴데이터 삭제
     void deleteMenuData(Long menu_Id);
 
+    //메뉴데이터 상세조회
+    MenuDTO getMenuDetail(Long menuId);
+
 }

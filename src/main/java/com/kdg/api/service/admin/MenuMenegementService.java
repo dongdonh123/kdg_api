@@ -38,4 +38,12 @@ public class MenuMenegementService {
         menuMenegementMapper.deleteMenuData(boardId);
     }
 
+    //게시판 상세조회
+    public MenuDTO getMenuDetail(Long menuId) {
+        if (menuMenegementMapper.findMenuId(menuId) == null) {
+            throw new IllegalArgumentException("MenuId를 찾을 수 없습니다. ID: " + menuId);
+        }
+        return menuMenegementMapper.getMenuDetail(menuId);
+    }
+
 }

@@ -61,5 +61,36 @@
         '관리자킹동환');
     </insert>
 
+    <select id="findMenuId" parameterType="long" resultType="long">
+        SELECT menu_id
+        FROM kdh.tb_menu_mgt
+        WHERE menu_id = #{menu_id};
+    </select>
+
+
+
+    <delete id="deleteMenuData" parameterType="long">
+        DELETE FROM kdh.tb_menu_mgt
+        WHERE menu_id = #{menu_id};
+    </delete>
+
+    <select id="getMenuDetail" parameterType="long" resultMap="MenuListResultMap">
+        select
+        menu_id,
+        menu_code,
+        menu_name,
+        menu_seq,
+        org_menu_id,
+        use_yn,
+        menu_url,
+        create_dt,
+        create_user,
+        modify_dt,
+        modify_user
+        from kdh.tb_menu_mgt
+        where 1 = 1
+        and menu_id = #{menu_id};
+    </select>
+
 
 </mapper>
