@@ -19,6 +19,8 @@ public interface MenuMenegementMapper {
     //신규등록
     void insertMenuData(MenuDTO menuDTO);
 
+    void updateMenuData(MenuDTO menuDTO);
+
     //메뉴데이터id조회
     Long  findMenuId(Long menu_Id);
 

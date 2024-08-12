@@ -30,6 +30,15 @@ public class MenuMenegementService {
     public void insertMenuData(MenuDTO menuDTO) {menuMenegementMapper.insertMenuData(menuDTO);
     }
 
+    //게시판 수정
+    public void updateMenuData(Long menuId, MenuDTO menuDTO) {
+        if (menuMenegementMapper.findMenuId(menuId) == null) {
+            throw new IllegalArgumentException("메뉴 ID를 찾을 수 없습니다. ID: " + menuId);
+        }
+        System.out.println("여기도 오닝?");
+        menuMenegementMapper.updateMenuData(menuDTO);
+    }
+
     //삭제
     public void deleteMenuData(Long boardId) {
         if (menuMenegementMapper.findMenuId(boardId) == null) {

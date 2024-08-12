@@ -20,7 +20,7 @@ public class MenuMenegementController {
     @Autowired
     private MenuMenegementService menuMenegementService;
 
-    // 게시판 목록 조회 API
+    // 메뉴 목록 조회 API
     @GetMapping
     public Object getmenuList(){
 
@@ -70,10 +70,25 @@ public class MenuMenegementController {
             System.out.println("zzz");
             // 메뉴데이터 저장
             menuMenegementService.insertMenuData(menuDTO);
-            return new ResponseEntity<>("메뉴관리 저장 성공", HttpStatus.CREATED);
+            return new ResponseEntity<>("메뉴데이터 신규등록 성공", HttpStatus.CREATED);
         } catch (Exception e) {
             // 오류 발생 시 응답
-            return new ResponseEntity<>("메뉴관리 저장 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("메뉴데이터 신규등록 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //메뉴 수정
+    @PutMapping("/{menu_id}")
+    public ResponseEntity<String> updateBoard(@PathVariable("menu_id") Long menuId, @RequestBody MenuDTO menuDTO) {
+        try {
+            System.out.println("여기오냐");
+            // 게시판 정보 수정
+            menuDTO.setMenu_id(menuId.intValue());
+            menuMenegementService.updateMenuData(menuId, menuDTO);
+            return new ResponseEntity<>("메뉴데이터 수정 성공", HttpStatus.OK);
+        } catch (Exception e) {
+            // 오류 발생 시 응답
+            return new ResponseEntity<>("메뉴데이터 수정 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -82,9 +97,9 @@ public class MenuMenegementController {
     public ResponseEntity<String> deleteMenuData(@PathVariable("menu_id") Long menu_id) {
         try {
             menuMenegementService.deleteMenuData(menu_id);
-            return new ResponseEntity<>("게시글 삭제 성공", HttpStatus.OK);
+            return new ResponseEntity<>("메뉴데이터 삭제 성공", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("게시글 삭제 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("메뉴데이터 삭제 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

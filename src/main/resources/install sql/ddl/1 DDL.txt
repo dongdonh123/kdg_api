@@ -36,3 +36,15 @@ CREATE TABLE kdh.tb_menu_mgt (
 	CONSTRAINT tb_menu_mgt_pkey PRIMARY KEY (menu_id)
 );
 
+CREATE TABLE kdh.tb_data_init (
+	init_id numeric NOT NULL,
+	menu_id varchar(100) NULL,
+	data_ctn varchar(100) NULL,
+	init_sql text null,
+	create_dt timestamp NOT NULL,
+	create_user varchar(100) NOT NULL,
+	modify_dt timestamp NULL,
+	modify_user varchar(100) NULL,
+	CONSTRAINT tb_data_init_pkey PRIMARY KEY (init_id)
+);
+

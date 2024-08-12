@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdg.api.mapper.maintenance.InitDataMapper">
+
+    <resultMap id="InitDataResultMap" type="com.kdg.api.model.InitDataDTO">
+        <result property="init_id" column="init_id"/>
+        <result property="menu_id" column="menu_id"/>
+        <result property="menu_name" column="menu_name"/>
+        <result property="table_id" column="table_id"/>
+        <result property="data_ctn" column="data_ctn"/>
+        <result property="init_sql" column="init_sql"/>
+        <result property="create_dt" column="create_dt"/>
+        <result property="create_user" column="create_user"/>
+        <result property="modify_dt" column="modify_dt"/>
+        <result property="modify_user" column="modify_user"/>
+    </resultMap>
+
+
+    <select id="findInitDataId" parameterType="long" resultType="long">
+        SELECT init_id
+        FROM kdh.tb_data_init
+        WHERE menu_id = #{menu_id}
+    </select>
+
+
+    <select id="getInitDataDetail" parameterType="long" resultMap="InitDataResultMap">
+        select
+        init_id,
+        menu_id,
+        menu_name,
+        table_id,
+        data_ctn,
+        init_sql,
+        create_dt,
+        create_user,
+        modify_dt,
+        modify_user
+        from kdh.tb_data_init
+        where menu_id = #{menu_id}
+    </select>
+
+    <select id="getcurrentCNT" parameterType="String" resultType="long">
+        select
+        count(*)
+        from kdh.${table_id}
+    </select>
+
+
+
+
+
+
+
+
+
+
+</mapper>
