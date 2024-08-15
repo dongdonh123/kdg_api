@@ -25,7 +25,7 @@
         menu_name
         from kdh.tb_menu_mgt
         where org_menu_id ='0'
-        order by org_menu_id , menu_id ;
+        order by org_menu_id , menu_seq ;
     </select>
 
     <select id="selectDownMenuList" resultMap="MenuListResultMap">
@@ -35,7 +35,7 @@
         org_menu_id
         from kdh.tb_menu_mgt
         where org_menu_id !='0'
-        order by org_menu_id , menu_id ;
+        order by org_menu_id , menu_seq ;
     </select>
 
     <insert id="insertMenuData"  parameterType="com.kdg.api.model.MenuDTO">

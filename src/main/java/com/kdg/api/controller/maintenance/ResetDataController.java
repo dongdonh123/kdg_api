@@ -5,10 +5,9 @@ import com.kdg.api.model.InitDataDTO;
 import com.kdg.api.model.MenuDTO;
 import com.kdg.api.service.maintenance.ResetDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/maintenance/resetdata")
@@ -32,6 +31,47 @@ public class ResetDataController {
             };
             return response;
 
+        } catch (Exception e) {
+            // 예외 처리: 오류 메시지와 함께 반환
+            return new Object() {
+                public final String error = "요청을 처리하는 동안 오류가 발생했습니다.";
+                public final String details = e.getMessage();
+            };
+        }
+    }
+
+    //메뉴의 데이터 삭제
+    @DeleteMapping("/{menu_id}")
+    public Object deleteMenuData(@PathVariable("menu_id") Long menu_id) {
+        try {
+            Long delete_ctn_ = resetDataService.deleteMenuData(menu_id);
+
+            // 응답 데이터 구성
+            Object response = new Object() {
+                public final String details = "메뉴 데이터 " + delete_ctn_ +"건이 정상적으로 삭제 됐습니다.";
+            };
+            return response;
+        } catch (Exception e) {
+            // 예외 처리: 오류 메시지와 함께 반환
+            return new Object() {
+                public final String error = "요청을 처리하는 동안 오류가 발생했습니다.";
+                public final String details = e.getMessage();
+            };
+        }
+    }
+
+    //메뉴의 데이터 삭제
+    @PutMapping("/{menu_id}")
+    public Object resetMenuData(@PathVariable("menu_id") Long menu_id) {
+        try {
+            Long delete_ctn_ = resetDataService.deleteMenuData(menu_id);
+            Long insert_ctn_ = resetDataService.insertMenuData(menu_id);
+
+            // 응답 데이터 구성
+            Object response = new Object() {
+                public final String details = "메뉴 데이터 " + delete_ctn_ +"건이 삭제 후 "+insert_ctn_+"건이 정상적으로 insert 됐습니다";
+            };
+            return response;
         } catch (Exception e) {
             // 예외 처리: 오류 메시지와 함께 반환
             return new Object() {
