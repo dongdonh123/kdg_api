@@ -1,3 +1,8 @@
+테이블만들면
+1. 여기에 DDL스크립트 넣기
+2. 데이터는 아래 dml폴더에 넣기
+3. 데이터리셋 테이블에 관련 데이터 넣기
+
 
 CREATE TABLE kdh.kdh_login (
 	seq numeric NULL,
@@ -46,5 +51,17 @@ CREATE TABLE kdh.tb_data_init (
 	modify_dt timestamp NULL,
 	modify_user varchar(100) NULL,
 	CONSTRAINT tb_data_init_pkey PRIMARY KEY (init_id)
+);
+
+CREATE TABLE kdh.tb_role_mgt (
+	role_id numeric NOT NULL,
+	role_code varchar(100) NULL,
+	role_name varchar(100) NULL,
+	meta_use_yn varchar(1) NULL,
+	create_dt timestamp NOT NULL,
+	create_user varchar(100) NOT NULL,
+	modify_dt timestamp NULL,
+	modify_user varchar(100) NULL,
+	CONSTRAINT tb_role_mgt_pkey PRIMARY KEY (role_id)
 );
 

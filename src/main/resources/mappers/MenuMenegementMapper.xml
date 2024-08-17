@@ -69,13 +69,13 @@
 
     <update id="updateMenuData" parameterType="com.kdg.api.model.MenuDTO">
         UPDATE kdh.tb_menu_mgt set
-            menu_code = #{menu_code},
-            menu_name = #{menu_name},
-            menu_seq = #{menu_seq},
-            use_yn = #{use_yn},
-            menu_url = #{menu_url},
-            modify_dt = now(),
-            modify_user = '마지막수정자'
+        menu_code = #{menu_code},
+        menu_name = #{menu_name},
+        menu_seq = #{menu_seq},
+        use_yn = #{use_yn},
+        menu_url = #{menu_url},
+        modify_dt = now(),
+        modify_user = '마지막수정자'
         WHERE menu_id = #{menu_id}
     </update>
 

@@ -18,9 +18,7 @@ public class MenuMenegementService {
     public MenuMenegementService(MenuMenegementMapper menuMenegementMapper){this.menuMenegementMapper =menuMenegementMapper; }
 
     //리스트데이터
-    public List<MenuDTO> getUpmenuList() {
-        return menuMenegementMapper.selectUpMenuList();
-    }
+    public List<MenuDTO> getUpmenuList() { return menuMenegementMapper.selectUpMenuList();}
 
     public List<MenuDTO> getDownmenuList() {
         return menuMenegementMapper.selectDownMenuList();
@@ -35,7 +33,6 @@ public class MenuMenegementService {
         if (menuMenegementMapper.findMenuId(menuId) == null) {
             throw new IllegalArgumentException("메뉴 ID를 찾을 수 없습니다. ID: " + menuId);
         }
-        System.out.println("여기도 오닝?");
         menuMenegementMapper.updateMenuData(menuDTO);
     }
 
@@ -47,7 +44,7 @@ public class MenuMenegementService {
         menuMenegementMapper.deleteMenuData(boardId);
     }
 
-    //게시판 상세조회
+    //메뉴 상세조회
     public MenuDTO getMenuDetail(Long menuId) {
         if (menuMenegementMapper.findMenuId(menuId) == null) {
             throw new IllegalArgumentException("MenuId를 찾을 수 없습니다. ID: " + menuId);

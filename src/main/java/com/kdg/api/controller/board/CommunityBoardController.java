@@ -23,6 +23,8 @@ public class CommunityBoardController {
             @RequestParam(value = "page_cnt", defaultValue = "50") int page_cnt){
 
         try {
+
+
             // 기타정보처리
             OtherInformationDTO otherInformation_DTO_ = communityBoardService.otherInformation(page_cnt);
             otherInformation_DTO_.setPage_no(page_no);

@@ -1,10 +1,10 @@
 package com.kdg.api.mapper.admin;
 
 
-import com.kdg.api.model.BoardDTO;
+
 import com.kdg.api.model.MenuDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+
 
 import java.util.List;
 
