@@ -22,4 +22,13 @@ public interface RoleMenegementMapper {
 
     //역할 상세조회
     RoleDTO getRoleDetail(Long role_id);
+
+    // 신규 등록
+    void insertRole(RoleDTO roleDTO);
+
+    // 수정 등록
+    void updateRole(RoleDTO roleDTO);
+
+    // 삭제
+    void deleteRole(Long role_Id);
 }

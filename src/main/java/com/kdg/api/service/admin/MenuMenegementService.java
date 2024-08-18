@@ -28,7 +28,7 @@ public class MenuMenegementService {
     public void insertMenuData(MenuDTO menuDTO) {menuMenegementMapper.insertMenuData(menuDTO);
     }
 
-    //게시판 수정
+    //메뉴 수정
     public void updateMenuData(Long menuId, MenuDTO menuDTO) {
         if (menuMenegementMapper.findMenuId(menuId) == null) {
             throw new IllegalArgumentException("메뉴 ID를 찾을 수 없습니다. ID: " + menuId);

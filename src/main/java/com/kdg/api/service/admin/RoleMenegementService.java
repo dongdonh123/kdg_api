@@ -35,6 +35,26 @@ public class RoleMenegementService {
         return roleMenegementMapper.getRoleDetail(roleId);
     }
 
+    //역할 신규
+    public void insertRole(RoleDTO roleDTO) {roleMenegementMapper.insertRole(roleDTO);
+    }
+
+    //역할 수정
+    public void updateRole(Long roleId, RoleDTO roleDTO) {
+        if (roleMenegementMapper.findRoleId(roleId) == null) {
+            throw new IllegalArgumentException("RoleId를 찾을 수 없습니다. ID: " + roleId);
+        }
+        roleMenegementMapper.updateRole(roleDTO);
+    }
+
+    //삭제
+    public void deleteRole(Long roleId) {
+        if (roleMenegementMapper.findRoleId(roleId) == null) {
+            throw new IllegalArgumentException("RoleId를 찾을 수 없습니다. ID: " + roleId);
+        }
+        roleMenegementMapper.deleteRole(roleId);
+    }
+
 
 
 }

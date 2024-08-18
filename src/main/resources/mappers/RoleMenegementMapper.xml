@@ -47,10 +47,10 @@
 
 
     <select id="selectOtherInformation" resultMap="RoleOtherInformationMap">
-        select
-        count(*) as total_row,
-        count(*) / #{page_cnt} +1 as max_page_no
-        from kdh.tb_role_mgt
+        SELECT
+        COUNT(*) AS total_row,
+        CEIL(COUNT(*) / #{page_cnt}::float) AS max_page_no
+        FROM kdh.tb_role_mgt;
     </select>
 
     <select id="findRoleId" parameterType="long" resultType="long">
@@ -73,6 +73,38 @@
         where 1 = 1
         and role_id = #{role_id};
     </select>
+
+    <insert id="insertRole"  parameterType="com.kdg.api.model.RoleDTO">
+        INSERT INTO kdh.tb_role_mgt
+        (role_id,
+        role_code,
+        role_name,
+        meta_use_yn,
+        create_dt,
+        create_user)
+        VALUES
+        ((SELECT COALESCE(MAX(role_id), 0) + 1 FROM kdh.tb_role_mgt),
+        #{role_code},
+        #{role_name},
+        #{meta_use_yn},
+        NOW(),
+        '관리자킹동환');
+    </insert>
+
+    <update id="updateRole" parameterType="com.kdg.api.model.RoleDTO">
+        UPDATE kdh.tb_role_mgt set
+        role_code = #{role_code},
+        role_name = #{role_name},
+        meta_use_yn = #{meta_use_yn},
+        modify_dt = now(),
+        modify_user = '마지막수정자'
+        WHERE role_id = #{role_id}
+    </update>
+
+    <delete id="deleteRole" parameterType="long">
+        DELETE FROM kdh.tb_role_mgt
+        WHERE role_id = #{role_id};
+    </delete>
 
 
 

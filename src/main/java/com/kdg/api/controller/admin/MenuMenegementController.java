@@ -65,41 +65,57 @@ public class MenuMenegementController {
 
     //신규등록
     @PostMapping
-    public ResponseEntity<String> insertMenuData(@RequestBody MenuDTO menuDTO){
+    public Object insertMenuData(@RequestBody MenuDTO menuDTO){
         try {
-            System.out.println("zzz");
             // 메뉴데이터 저장
             menuMenegementService.insertMenuData(menuDTO);
-            return new ResponseEntity<>("메뉴데이터 신규등록 성공", HttpStatus.CREATED);
+            // 응답 데이터 구성
+            Object response = new Object() {
+                public final String resultmessage = "메뉴를 신규 등록 했습니다";
+            };
+            return response;
         } catch (Exception e) {
             // 오류 발생 시 응답
-            return new ResponseEntity<>("메뉴데이터 신규등록 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
         }
     }
 
     //메뉴 수정
     @PutMapping("/{menu_id}")
-    public ResponseEntity<String> updateBoard(@PathVariable("menu_id") Long menuId, @RequestBody MenuDTO menuDTO) {
+    public Object updateMenu(@PathVariable("menu_id") Long menuId, @RequestBody MenuDTO menuDTO) {
         try {
-            System.out.println("여기오냐");
             // 게시판 정보 수정
             menuDTO.setMenu_id(menuId.intValue());
             menuMenegementService.updateMenuData(menuId, menuDTO);
-            return new ResponseEntity<>("메뉴데이터 수정 성공", HttpStatus.OK);
+            // 응답 데이터 구성
+            Object response = new Object() {
+                public final String resultmessage = "메뉴를 수정 등록 했습니다";
+            };
+            return response;
         } catch (Exception e) {
             // 오류 발생 시 응답
-            return new ResponseEntity<>("메뉴데이터 수정 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
         }
     }
 
     //삭제
     @DeleteMapping("/{menu_id}")
-    public ResponseEntity<String> deleteMenuData(@PathVariable("menu_id") Long menu_id) {
+    public Object deleteMenuData(@PathVariable("menu_id") Long menu_id) {
         try {
             menuMenegementService.deleteMenuData(menu_id);
-            return new ResponseEntity<>("메뉴데이터 삭제 성공", HttpStatus.OK);
+            // 응답 데이터 구성
+            Object response = new Object() {
+                public final String resultmessage = "메뉴를 삭제 했습니다";
+            };
+            return response;
         } catch (Exception e) {
-            return new ResponseEntity<>("메뉴데이터 삭제 실패 : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
         }
     }
 

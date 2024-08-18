@@ -34,8 +34,7 @@ public class ResetDataController {
         } catch (Exception e) {
             // 예외 처리: 오류 메시지와 함께 반환
             return new Object() {
-                public final String error = "요청을 처리하는 동안 오류가 발생했습니다.";
-                public final String details = e.getMessage();
+                public final String details = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
             };
         }
     }
@@ -54,8 +53,7 @@ public class ResetDataController {
         } catch (Exception e) {
             // 예외 처리: 오류 메시지와 함께 반환
             return new Object() {
-                public final String error = "요청을 처리하는 동안 오류가 발생했습니다.";
-                public final String details = e.getMessage();
+                public final String details = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
             };
         }
     }
@@ -75,8 +73,7 @@ public class ResetDataController {
         } catch (Exception e) {
             // 예외 처리: 오류 메시지와 함께 반환
             return new Object() {
-                public final String error = "요청을 처리하는 동안 오류가 발생했습니다.";
-                public final String details = e.getMessage();
+                public final String details = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
             };
         }
     }
