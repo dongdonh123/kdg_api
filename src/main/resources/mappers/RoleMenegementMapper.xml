@@ -50,7 +50,14 @@
         SELECT
         COUNT(*) AS total_row,
         CEIL(COUNT(*) / #{page_cnt}::float) AS max_page_no
-        FROM kdh.tb_role_mgt;
+        FROM kdh.tb_role_mgt
+        <where>
+            <!-- role_name이 존재하면 WHERE 절에 조건을 추가 -->
+            <if test="role_name != null and role_name != ''">
+                role_name LIKE CONCAT('%', #{role_name}, '%')
+            </if>
+        </where>
+        ;
     </select>
 
     <select id="findRoleId" parameterType="long" resultType="long">

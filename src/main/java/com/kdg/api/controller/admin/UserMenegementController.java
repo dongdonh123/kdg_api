@@ -2,48 +2,48 @@ package com.kdg.api.controller.admin;
 
 
 
-import com.kdg.api.model.BoardDTO;
-import com.kdg.api.model.MenuDTO;
 import com.kdg.api.model.OtherInformationDTO;
+
 import com.kdg.api.model.RoleDTO;
-import com.kdg.api.service.admin.RoleMenegementService;
+import com.kdg.api.model.UserDTO;
+import com.kdg.api.service.admin.UserMenegementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("api/admin/role")
-public class RoleMenegementController {
+@RequestMapping("api/admin/user")
+public class UserMenegementController {
 
     @Autowired
-    private RoleMenegementService roleMenegementService;
+    private UserMenegementService userMenegementService;
 
-    // 게시판 목록 조회 API
+    // 사용자 목록 조회 API
     @GetMapping
-    public Object getRoleList(
+    public Object getUserList(
             @RequestParam(value = "page_no", defaultValue = "1") int page_no,
             @RequestParam(value = "page_cnt", defaultValue = "50") int page_cnt,
-            @RequestParam(value = "role_name", required = false) String role_name){
+            @RequestParam(value = "user_name", required = false) String user_name,
+            @RequestParam(value = "user_account_id", required = false) String user_account_id){
 
         try {
             // 기타정보처리
-            OtherInformationDTO otherInformation_DTO_ = roleMenegementService.otherInformation(page_cnt,role_name);
+            OtherInformationDTO otherInformation_DTO_ = userMenegementService.otherInformation(page_cnt,user_name,user_account_id);
             otherInformation_DTO_.setPage_no(page_no);
             otherInformation_DTO_.setPage_cnt(page_cnt);
             otherInformation_DTO_.setCurrent_page_data_min((page_no-1) * page_cnt +1);
             otherInformation_DTO_.setCurrent_page_data_max(page_no * page_cnt);
 
-            // 페이지된 역할 리스트 가져오기
+            // 페이지된 사용자 리스트 가져오기
             page_no = (page_no-1) * page_cnt;
-            List<RoleDTO> pagingRoleList = roleMenegementService.getRoleList(page_no, page_cnt, role_name);
-            otherInformation_DTO_.setThis_page_row(pagingRoleList.size());
+            List<UserDTO> pagingUserList = userMenegementService.getUserList(page_no, page_cnt, user_name,user_account_id);
+            otherInformation_DTO_.setThis_page_row(pagingUserList.size());
 
             // 응답 데이터 구성
             Object response = new Object() {
-                public final List<RoleDTO> roleList = pagingRoleList;
+                public final List<UserDTO> userList = pagingUserList;
                 public final OtherInformationDTO otherInformation = otherInformation_DTO_;
             };
             return response;
@@ -55,15 +55,18 @@ public class RoleMenegementController {
         }
     }
 
-    // 역할 상세보기
-    @GetMapping("/{role_id}")
-    public Object getRoleDetail(@PathVariable("role_id") Long roleId){
+    // 사용자 상세보기
+    @GetMapping("/{user_id}")
+    public Object getUserDetail(@PathVariable("user_id") Long userId){
         try {
-            RoleDTO roleDTODetail = roleMenegementService.getRoleDetail(roleId);
+            UserDTO userDTODetail = userMenegementService.getUserDetail(userId);
+            List<RoleDTO> relUserRoleList_ = userMenegementService.getRelUserRoleList(userId);
+
 
             // 응답 데이터 구성
             Object response = new Object() {
-                public final RoleDTO roleDetail = roleDTODetail;
+                public final UserDTO userDetail = userDTODetail;
+                public final List<RoleDTO> relUserRoleList = relUserRoleList_;
             };
             return response;
 
@@ -77,13 +80,13 @@ public class RoleMenegementController {
 
     //신규등록
     @PostMapping
-    public Object insertRole(@RequestBody RoleDTO roleDTO){
+    public Object insertUser(@RequestBody UserDTO userDTO){
         try {
             // 메뉴데이터 저장
-            roleMenegementService.insertRole(roleDTO);
+            userMenegementService.insertUser(userDTO);
             // 응답 데이터 구성
             Object response = new Object() {
-                public final String resultmessage = "역할을 신규 등록 했습니다";
+                public final String resultmessage = "사용자을 신규 등록 했습니다";
             };
             return response;
         } catch (Exception e) {
@@ -95,14 +98,14 @@ public class RoleMenegementController {
     }
 
     //수정
-    @PutMapping("/{role_id}")
-    public Object updateRole(@PathVariable("role_id") Long role_id, @RequestBody RoleDTO roleDTO) {
+    @PutMapping("/{user_id}")
+    public Object updateUser(@PathVariable("user_id") Long user_id, @RequestBody UserDTO userDTO) {
         try {
             // 게시판 정보 수정
-            roleDTO.setRole_id(role_id.intValue());
-            roleMenegementService.updateRole(role_id,roleDTO);
+            userDTO.setUser_id((long) user_id.intValue());
+            userMenegementService.updateUser(user_id,userDTO);
             Object response = new Object() {
-                public final String resultmessage = "역할을 수정 등록 했습니다";
+                public final String resultmessage = "사용자을 수정 등록 했습니다";
             };
             return response;
         } catch (Exception e) {
@@ -113,12 +116,12 @@ public class RoleMenegementController {
     }
 
     //삭제
-    @DeleteMapping("/{role_id}")
-    public Object deleteRole(@PathVariable("role_id") Long role_id) {
+    @DeleteMapping("/{user_id}")
+    public Object deleteUser(@PathVariable("user_id") Long user_id) {
         try {
-            roleMenegementService.deleteRole(role_id);
+            userMenegementService.deleteUser(user_id);
             Object response = new Object() {
-                public final String resultmessage = "역할을 삭제 했습니다";
+                public final String resultmessage = "사용자을 삭제 했습니다";
             };
             return response;
         } catch (Exception e) {

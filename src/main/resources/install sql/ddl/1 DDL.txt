@@ -65,3 +65,37 @@ CREATE TABLE kdh.tb_role_mgt (
 	CONSTRAINT tb_role_mgt_pkey PRIMARY KEY (role_id)
 );
 
+CREATE TABLE kdh.tb_user_mgt (
+	user_id numeric NOT NULL,
+	user_name varchar(100) NULL,
+	user_account_id varchar(100) NULL,
+	user_passwd varchar(100) NULL,
+	user_passwd_fail_cnt varchar(100) NULL,
+	user_use_yn varchar(100)  NULL,
+	user_category varchar(100)  NULL,
+	user_department varchar(100)  NULL,
+	user_phon_no varchar(100)  NULL,
+	user_email varchar(100)  NULL,
+	create_dt timestamp NULL,
+	create_user varchar(100) NULL,
+	modify_dt timestamp NULL,
+	modify_user varchar(100) NULL,
+	CONSTRAINT tb_user_mgt_pkey PRIMARY KEY (user_id)
+);
+
+CREATE TABLE kdh.tb_rel_user_role (
+	rel_user_role_id numeric NOT NULL,
+	user_id numeric NULL,
+	role_id numeric NULL,
+	create_user varchar(100) NULL,
+	create_dt timestamp NULL,
+	CONSTRAINT tb_rel_user_role_pkey PRIMARY KEY (rel_user_role_id)
+);
+
+COMMENT ON table kdh.tb_rel_user_role IS '사용자-역할 관계 테이블';
+COMMENT ON COLUMN kdh.tb_rel_user_role.rel_user_role_id IS '사용자-역할 관계 ID';
+COMMENT ON COLUMN kdh.tb_rel_user_role.user_id IS '사용자ID';
+COMMENT ON COLUMN kdh.tb_rel_user_role.role_id IS '역할ID';
+COMMENT ON COLUMN kdh.tb_rel_user_role.create_user IS '최초등록자';
+COMMENT ON COLUMN kdh.tb_rel_user_role.create_dt IS '최초등록일';
+

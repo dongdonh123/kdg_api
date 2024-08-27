@@ -23,8 +23,8 @@ public class RoleMenegementService {
     }
 
     //기타정보데이터 (리스트데이터)
-    public OtherInformationDTO otherInformation(int page_cnt) {
-        return roleMenegementMapper.selectOtherInformation(page_cnt);
+    public OtherInformationDTO otherInformation(int page_cnt, String role_name) {
+        return roleMenegementMapper.selectOtherInformation(page_cnt, role_name);
     }
 
     //역할 상세조회

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdg.api.mapper.admin.UserMenegementMapper">
+
+    <resultMap id="UserResultMap" type="com.kdg.api.model.UserDTO">
+        <id property="user_id" column="user_id"/>
+        <result property="user_name" column="user_name"/>
+        <result property="user_account_id" column="user_account_id"/>
+        <result property="user_passwd" column="user_passwd"/>
+        <result property="user_passwd_fail_cnt" column="user_passwd_fail_cnt"/>
+        <result property="user_use_yn" column="user_use_yn"/>
+        <result property="user_category" column="user_category"/>
+        <result property="user_department" column="user_department"/>
+        <result property="user_phon_no" column="user_phon_no"/>
+        <result property="user_email" column="user_email"/>
+        <result property="create_dt" column="create_dt"/>
+        <result property="create_user" column="create_user"/>
+        <result property="modify_dt" column="modify_dt"/>
+        <result property="modify_user" column="modify_user"/>
+    </resultMap>
+
+
+    <resultMap id="UserOtherInformationMap" type="com.kdg.api.model.OtherInformationDTO">
+        <id property="total_row" column="total_row"/>
+        <result property="max_page_no" column="max_page_no"/>
+    </resultMap>
+
+    <resultMap id="RoleResultMap" type="com.kdg.api.model.RoleDTO">
+        <id property="role_id" column="role_id"/>
+        <result property="role_code" column="role_code"/>
+        <result property="role_name" column="role_name"/>
+        <result property="meta_use_yn" column="meta_use_yn"/>
+        <result property="create_dt" column="create_dt"/>
+        <result property="create_user" column="create_user"/>
+        <result property="modify_dt" column="modify_dt"/>
+        <result property="modify_user" column="modify_user"/>
+        <result property="row_count" column="row_count"/>
+        <result property="total_page" column="total_page"/>
+    </resultMap>
+
+    <select id="selectUserList" resultMap="UserResultMap">
+        SELECT
+            user_id,
+            user_name,
+            user_account_id,
+            user_passwd,
+            user_passwd_fail_cnt,
+            user_use_yn,
+            user_category,
+            user_department,
+            user_phon_no,
+            user_email,
+            create_dt,
+            create_user,
+            modify_dt,
+            modify_user
+        FROM kdh.tb_user_mgt trm
+        <where>
+            1=1
+            <if test="user_name != null and user_name != ''">
+                and user_name LIKE CONCAT('%', #{user_name}, '%')
+            </if>
+            <if test="user_account_id != null and user_account_id != ''">
+                and user_account_id LIKE CONCAT('%', #{user_account_id}, '%')
+            </if>
+        </where>
+        ORDER BY create_dt
+        OFFSET #{page_no} LIMIT #{page_cnt};
+    </select>
+
+
+    <select id="selectOtherInformation" resultMap="UserOtherInformationMap">
+        SELECT
+        COUNT(*) AS total_row,
+        CEIL(COUNT(*) / #{page_cnt}::float) AS max_page_no
+        FROM kdh.tb_user_mgt
+        <where>
+            1=1
+            <if test="user_name != null and user_name != ''">
+                and user_name LIKE CONCAT('%', #{user_name}, '%')
+            </if>
+            <if test="user_account_id != null and user_account_id != ''">
+                and user_account_id LIKE CONCAT('%', #{user_account_id}, '%')
+            </if>
+        </where>
+        ;
+    </select>
+
+    <select id="findUserId" parameterType="long" resultType="long">
+        SELECT user_id
+        FROM kdh.tb_user_mgt
+        WHERE user_id = #{user_id};
+    </select>
+
+    <select id="getUserDetail" parameterType="long" resultMap="UserResultMap">
+        SELECT
+            user_id,
+            user_name,
+            user_account_id,
+            user_passwd,
+            user_passwd_fail_cnt,
+            user_use_yn,
+            user_category,
+            user_department,
+            user_phon_no,
+            user_email,
+            create_dt,
+            create_user,
+            modify_dt,
+            modify_user
+        FROM kdh.tb_user_mgt
+        where 1 = 1
+        and user_id = #{user_id};
+    </select>
+
+    <insert id="insertUser"  parameterType="com.kdg.api.model.UserDTO">
+        INSERT INTO kdh.tb_user_mgt
+        (user_id,
+        user_name,
+        user_account_id,
+        user_passwd_fail_cnt,
+        user_use_yn,
+        user_category,
+        user_department,
+        user_phon_no,
+        user_email,
+        create_dt,
+        create_user)
+        VALUES
+        ((SELECT COALESCE(MAX(user_id), 0) + 1 FROM kdh.tb_user_mgt),
+        #{user_name},
+        #{user_account_id},
+        #{user_passwd_fail_cnt},
+        #{user_use_yn},
+        #{user_category},
+        #{user_department},
+        #{user_phon_no},
+        #{user_email},
+        NOW(),
+        '관리자김동환');
+    </insert>
+
+    <insert id="insertRelUserRole"  parameterType="long">
+        INSERT INTO kdh.tb_rel_user_role
+        (rel_user_role_id,
+        user_id,
+        role_id,
+        create_user,
+        create_dt)
+        VALUES
+        ((SELECT COALESCE(MAX(rel_user_role_id), 0) + 1 FROM kdh.tb_rel_user_role),
+        (SELECT MAX(user_id) FROM kdh.tb_user_mgt),
+        #{role_id},
+        '관리자김동환',
+        NOW());
+    </insert>
+
+
+    <update id="updateUser" parameterType="com.kdg.api.model.UserDTO">
+        UPDATE kdh.tb_user_mgt set
+        user_code = #{user_code},
+        user_name = #{user_name},
+        meta_use_yn = #{meta_use_yn},
+        modify_dt = now(),
+        modify_user = '마지막수정자'
+        WHERE user_id = #{user_id}
+    </update>
+
+    <delete id="deleteUser" parameterType="long">
+        DELETE FROM kdh.tb_user_mgt
+        WHERE user_id = #{user_id};
+    </delete>
+
+    <select id="relUserRoleSelect" parameterType="long" resultMap="RoleResultMap">
+        SELECT
+        role_id
+        FROM kdh.tb_rel_user_role
+        where 1=1
+        and user_id = #{user_id};
+    </select>
+
+
+
+</mapper>
