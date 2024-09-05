@@ -1,4 +1,5 @@
 INSERT INTO kdh.tb_user_mgt (user_id,user_name,user_account_id,user_passwd,user_passwd_fail_cnt,user_use_yn,user_department,user_phon_no,user_email,create_dt,create_user,modify_dt,modify_user) VALUES
+	 (1,'관리자김동환','관리자김동환',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
 	 (2,'이서윤','leeseoyun84',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
 	 (3,'박지훈','parkjihoon77',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
 	 (4,'최수현','choisuhyun99',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
@@ -17,5 +18,4 @@ INSERT INTO kdh.tb_user_mgt (user_id,user_name,user_account_id,user_passwd,user_
 	 (17,'유정현','yujunghyun96',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
 	 (18,'백은서','baekeunseo81',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
 	 (19,'전하린','jeonharin85',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
-	 (20,'김지수','kimjisoo87',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL),
-	 (1,'관리자김동환','관리자김동환',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL);
+	 (20,'김지수','kimjisoo87',NULL,'0','Y',NULL,NULL,NULL,'2024-08-24 20:34:51.985592','관리자김동환',NULL,NULL);

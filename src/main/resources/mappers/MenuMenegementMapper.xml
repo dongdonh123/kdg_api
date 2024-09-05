@@ -50,7 +50,7 @@
         create_dt,
         create_user)
         VALUES
-        ((SELECT COALESCE(MAX(menu_id), 0) + 1 FROM kdh.tb_menu_mgt),
+        (#{menu_id},
         #{menu_code},
         #{menu_name},
         #{menu_seq},

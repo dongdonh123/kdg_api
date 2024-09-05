@@ -20,7 +20,7 @@ public class UserDTO {
     private Date modify_dt;
     private String modify_user;
 
-    private List<Long> rel_user_role;
+    private List<Long> rel_user_roleID;
 
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
@@ -134,11 +134,11 @@ public class UserDTO {
         this.user_category = user_category;
     }
 
-    public List<Long> getRel_user_role() {
-        return rel_user_role;
+    public List<Long> getRel_user_roleID() {
+        return rel_user_roleID;
     }
 
-    public void setRel_user_role(List<Long> rel_user_role) {
-        this.rel_user_role = rel_user_role;
+    public void setRel_user_roleID(List<Long> rel_user_roleID) {
+        this.rel_user_roleID = rel_user_roleID;
     }
 }

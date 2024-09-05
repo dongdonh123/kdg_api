@@ -90,7 +90,7 @@
         create_dt,
         create_user)
         VALUES
-        ((SELECT COALESCE(MAX(role_id), 0) + 1 FROM kdh.tb_role_mgt),
+        (#{role_id},
         #{role_code},
         #{role_name},
         #{meta_use_yn},

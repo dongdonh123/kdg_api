@@ -36,7 +36,7 @@ public class MenuMenegementController {
             // 상위 메뉴를 MenuTreeDTO로 변환
             for (MenuDTO upMenu : upMenuList_) {
                 // 하위 메뉴를 MenuTreeDTO로 변환하여 상위 메뉴에 추가
-                List<Integer> intList = new ArrayList<>();
+                List<Long> intList = new ArrayList<>();
                 List<String> stringList = new ArrayList<>();
                 for (MenuDTO downMenu : downMenuList_) {
                     if (downMenu.getOrg_menu_id() == upMenu.getMenu_id()) {
@@ -87,7 +87,7 @@ public class MenuMenegementController {
     public Object updateMenu(@PathVariable("menu_id") Long menuId, @RequestBody MenuDTO menuDTO) {
         try {
             // 게시판 정보 수정
-            menuDTO.setMenu_id(menuId.intValue());
+            menuDTO.setMenu_id((long) menuId.intValue());
             menuMenegementService.updateMenuData(menuId, menuDTO);
             // 응답 데이터 구성
             Object response = new Object() {

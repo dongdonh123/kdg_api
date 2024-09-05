@@ -8,8 +8,7 @@ INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,us
 	 (7,'menu007','공지사항 게시판','2',5,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (8,'menu008','메타데이터 관리','3',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (9,'menu009','단어','1',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
-	 (10,'menu010','도메인','2',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL);
-INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,use_yn,menu_url,create_dt,create_user,modify_dt,modify_user) VALUES
+	 (10,'menu010','도메인','2',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (11,'menu011','용어','3',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (12,'menu012','데이터표준화 신청결과현황','4',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (13,'menu013','테이블 신청','5',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
@@ -19,8 +18,7 @@ INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,us
 	 (17,'menu017','논리 물리 정합성 체크','9',8,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (18,'menu018','데이터품질관리','4',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (19,'menu019','영향도 분석','5',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
-	 (20,'menu020','비즈메타 관리','6',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL);
-INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,use_yn,menu_url,create_dt,create_user,modify_dt,modify_user) VALUES
+	 (20,'menu020','비즈메타 관리','6',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (21,'menu021','관리자 설정','7',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (22,'menu022','화면 메세지 관리','1',21,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (23,'menu023','코드 관리','2',21,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
@@ -30,6 +28,5 @@ INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,us
 	 (27,'menu027','업무 관리','6',21,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (28,'menu028','배치 관리','7',21,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (29,'menu029','사용자 관리','8',21,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
-	 (30,'menu030','제작자 유지 보수','8',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL);
-INSERT INTO kdh.tb_menu_mgt (menu_id,menu_code,menu_name,menu_seq,org_menu_id,use_yn,menu_url,create_dt,create_user,modify_dt,modify_user) VALUES
+	 (30,'menu030','제작자 유지 보수','8',0,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL),
 	 (31,'menu031','데이터 리셋','1',30,'Y','임시','2024-08-04 00:00:00','운영자',NULL,NULL);

@@ -1,0 +1,5 @@
+INSERT INTO tb_tbmaxid (table_nm,table_max_id) VALUES
+	 ('tb_board',117),
+	 ('tb_menu_mgt',31),
+	 ('tb_role_mgt',15),
+	 ('tb_user_mgt',20);

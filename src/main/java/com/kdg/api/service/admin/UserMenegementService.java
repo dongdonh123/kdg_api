@@ -1,6 +1,7 @@
 package com.kdg.api.service.admin;
 
 import com.kdg.api.mapper.admin.UserMenegementMapper;
+import com.kdg.api.mapper.common.CommonMapper;
 import com.kdg.api.model.OtherInformationDTO;
 import com.kdg.api.model.RoleDTO;
 import com.kdg.api.model.UserDTO;
@@ -17,9 +18,13 @@ import java.util.Map;
 public class UserMenegementService {
 
     private final UserMenegementMapper userMenegementMapper;
+    private final CommonMapper commonMapper;
 
     @Autowired
-    public UserMenegementService(UserMenegementMapper userMenegementMapper){this.userMenegementMapper =userMenegementMapper; }
+    public UserMenegementService(UserMenegementMapper userMenegementMapper, CommonMapper commonMapper){
+        this.userMenegementMapper =userMenegementMapper;
+        this.commonMapper = commonMapper;
+    }
 
     //리스트데이터
     public List<UserDTO> getUserList(int page_no, int page_cnt, String user_name, String user_account_id) {
@@ -41,9 +46,17 @@ public class UserMenegementService {
 
     //사용자 신규
     public void insertUser(UserDTO userDTO) {
+        String table_nm = "tb_user_mgt";
+        commonMapper.updateMaxId(table_nm); // maxid 올리기
+        Long max_id = commonMapper.findMaxId(table_nm); // maxid 가져오기
+        userDTO.setUser_id(max_id);
         userMenegementMapper.insertUser(userDTO);
-        for(int i =0; i < userDTO.getRel_user_role().size(); i++) {
-            userMenegementMapper.insertRelUserRole(userId,userDTO.getRel_user_role().get(i));
+        //사용자-역할 관계 데이터 넣기
+        for(int i =0; i < userDTO.getRel_user_roleID().size(); i++) {
+            String table_nm2 = "tb_rel_user_role";
+            commonMapper.updateMaxId(table_nm2); // maxid 올리기
+            Long rel_user_role_id = commonMapper.findMaxId(table_nm2); // maxid 가져오기
+            userMenegementMapper.insertRelUserRole(rel_user_role_id,userDTO.getRel_user_roleID().get(i));
         }
     }
 
@@ -52,11 +65,18 @@ public class UserMenegementService {
         if (userMenegementMapper.findUserId(userId) == null) {
             throw new IllegalArgumentException("UserId를 찾을 수 없습니다. ID: " + userId);
         }
+        //사용자 정보 수정
         userMenegementMapper.updateUser(userDTO);
-        for(int i =0; i < userDTO.getRel_user_role().size(); i++) {
-//            userMenegementMapper.deleteRelUserRole(userId,userDTO.getRel_user_role().get(i));
-//            userMenegementMapper.insertRelUserRole(userId,userDTO.getRel_user_role().get(i));
+        //사용자 역할 정보 삭제
+        userMenegementMapper.deleteRelUserRole(userId);
+        //사용자 역할 정보 입력
+        for(int i =0; i < userDTO.getRel_user_roleID().size(); i++) {
+            String table_nm = "tb_rel_user_role";
+            commonMapper.updateMaxId(table_nm); // maxid 올리기
+            Long rel_user_role_id = commonMapper.findMaxId(table_nm); // maxid 가져오기
+            userMenegementMapper.insertRelUserRole(rel_user_role_id,userDTO.getRel_user_roleID().get(i));
         }
+
     }
 
     //삭제

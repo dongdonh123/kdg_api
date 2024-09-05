@@ -23,10 +23,10 @@ public interface UserMenegementMapper {
     //역할 상세조회
     UserDTO getUserDetail(Long user_id);
 
-    
+
     // 신규 등록
     void insertUser(UserDTO userDTO);
-    void insertRelUserRole(Long role_id);
+    void insertRelUserRole(Long rel_user_role_id, Long role_id);
 
     // 수정 등록
     void updateUser(UserDTO userDTO);
@@ -35,5 +35,7 @@ public interface UserMenegementMapper {
     void deleteUser(Long user_Id);
 
     //사용자 역할정보
-    List<RoleDTO> relUserRoleSelect(Long user_id, Long role_id);
+    List<RoleDTO> relUserRoleSelect(Long user_id);
+
+    void deleteRelUserRole(Long role_id);
 }

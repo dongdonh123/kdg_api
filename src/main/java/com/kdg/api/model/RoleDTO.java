@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class RoleDTO {
 
-    private int role_id;
+    private Long role_id;
     private String role_code;
     private String role_name;
     private String meta_use_yn;
@@ -18,7 +18,7 @@ public class RoleDTO {
     }
 
     // 생성자
-    public RoleDTO(int role_id, String role_code, String role_name, String meta_use_yn, Date create_dt, String create_user, Date modify_dt, String modify_user) {
+    public RoleDTO(Long role_id, String role_code, String role_name, String meta_use_yn, Date create_dt, String create_user, Date modify_dt, String modify_user) {
         this.role_id = role_id;
         this.role_code = role_code;
         this.role_name = role_name;
@@ -29,7 +29,7 @@ public class RoleDTO {
         this.modify_user = modify_user;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(Long role_id) {
         this.role_id = role_id;
     }
 
@@ -89,7 +89,7 @@ public class RoleDTO {
         return role_code;
     }
 
-    public int getRole_id() {
+    public Long getRole_id() {
         return role_id;
     }
 }

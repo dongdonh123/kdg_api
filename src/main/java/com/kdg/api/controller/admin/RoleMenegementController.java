@@ -99,7 +99,7 @@ public class RoleMenegementController {
     public Object updateRole(@PathVariable("role_id") Long role_id, @RequestBody RoleDTO roleDTO) {
         try {
             // 게시판 정보 수정
-            roleDTO.setRole_id(role_id.intValue());
+            roleDTO.setRole_id((long) role_id.intValue());
             roleMenegementService.updateRole(role_id,roleDTO);
             Object response = new Object() {
                 public final String resultmessage = "역할을 수정 등록 했습니다";

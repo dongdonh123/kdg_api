@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdg.api.mapper.common.CommonMapper">
+
+    <select id="findMaxId" parameterType="String" resultType="Long">
+        SELECT table_max_id
+        FROM kdh.tb_tbmaxid
+        WHERE table_nm = #{table_nm}
+    </select>
+
+    <update id="updateMaxId" parameterType="String">
+        UPDATE kdh.tb_tbmaxid set
+            table_max_id = (select table_max_id+1  FROM kdh.tb_tbmaxid where table_nm = #{table_nm} )
+        WHERE table_nm = #{table_nm}
+    </update>
+
+
+
+
+
+
+</mapper>

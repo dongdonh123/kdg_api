@@ -130,7 +130,7 @@
         create_dt,
         create_user)
         VALUES
-        ((SELECT COALESCE(MAX(user_id), 0) + 1 FROM kdh.tb_user_mgt),
+        (#{user_id},
         #{user_name},
         #{user_account_id},
         #{user_passwd_fail_cnt},
@@ -151,7 +151,7 @@
         create_user,
         create_dt)
         VALUES
-        ((SELECT COALESCE(MAX(rel_user_role_id), 0) + 1 FROM kdh.tb_rel_user_role),
+        (#{rel_user_role_id},
         (SELECT MAX(user_id) FROM kdh.tb_user_mgt),
         #{role_id},
         '관리자김동환',
@@ -160,12 +160,32 @@
 
 
     <update id="updateUser" parameterType="com.kdg.api.model.UserDTO">
-        UPDATE kdh.tb_user_mgt set
-        user_code = #{user_code},
-        user_name = #{user_name},
-        meta_use_yn = #{meta_use_yn},
-        modify_dt = now(),
-        modify_user = '마지막수정자'
+        UPDATE kdh.tb_user_mgt
+        <set>
+            <if test="user_name != null">
+                user_name = #{user_name},
+            </if>
+            <if test="user_account_id != null">
+                user_account_id = #{user_account_id},
+            </if>
+            <if test="user_use_yn != null">
+                user_use_yn = #{user_use_yn},
+            </if>
+            <if test="user_category != null">
+                user_category = #{user_category},
+            </if>
+            <if test="user_department != null">
+                user_department = #{user_department},
+            </if>
+            <if test="user_phon_no != null">
+                user_phon_no = #{user_phon_no},
+            </if>
+            <if test="user_email != null">
+                user_email = #{user_email},
+            </if>
+            modify_dt = now(),
+            modify_user = '마지막수정자'
+        </set>
         WHERE user_id = #{user_id}
     </update>
 
@@ -181,6 +201,11 @@
         where 1=1
         and user_id = #{user_id};
     </select>
+
+    <delete id="deleteRelUserRole" parameterType="long">
+        DELETE FROM kdh.tb_rel_user_role
+        WHERE user_id = #{user_id};
+    </delete>
 
 
 

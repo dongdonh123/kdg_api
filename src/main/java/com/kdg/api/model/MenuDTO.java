@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class MenuDTO {
 
-    private int menu_id;
+    private Long menu_id;
     private String menu_code;
     private String menu_name;
     private int menu_seq;
-    private int org_menu_id;
+    private Long org_menu_id;
     private String use_yn;
     private String menu_url;
     private Date create_dt;
@@ -20,7 +20,7 @@ public class MenuDTO {
     public MenuDTO() {
     }
 
-    public void setMenu_id(int menu_id) {
+    public void setMenu_id(Long menu_id) {
         this.menu_id = menu_id;
     }
 
@@ -36,7 +36,7 @@ public class MenuDTO {
         this.menu_seq = menu_seq;
     }
 
-    public void setOrg_menu_id(int org_menu_id) {
+    public void setOrg_menu_id(Long org_menu_id) {
         this.org_menu_id = org_menu_id;
     }
 
@@ -64,7 +64,7 @@ public class MenuDTO {
         this.modify_user = modify_user;
     }
 
-    public int getMenu_id() {
+    public Long getMenu_id() {
         return menu_id;
     }
 
@@ -80,7 +80,7 @@ public class MenuDTO {
         return menu_seq;
     }
 
-    public int getOrg_menu_id() {
+    public Long getOrg_menu_id() {
         return org_menu_id;
     }
 
