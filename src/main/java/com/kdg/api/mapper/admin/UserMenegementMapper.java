@@ -26,7 +26,7 @@ public interface UserMenegementMapper {
 
     // 신규 등록
     void insertUser(UserDTO userDTO);
-    void insertRelUserRole(Long rel_user_role_id, Long role_id);
+    void insertRelUserRole(Long rel_user_role_id, Long user_id, Long role_id);
 
     // 수정 등록
     void updateUser(UserDTO userDTO);
@@ -38,4 +38,10 @@ public interface UserMenegementMapper {
     List<RoleDTO> relUserRoleSelect(Long user_id);
 
     void deleteRelUserRole(Long role_id);
+
+    //비밀번호초기화
+    void updateUserPasswdInit(Long user_id);
+
+    // 사용자 사용여부 변경
+    void updateUserUseYN(Long user_id);
 }

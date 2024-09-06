@@ -131,5 +131,40 @@ public class UserMenegementController {
         }
     }
 
+    //비밀번호 초기화
+    @PatchMapping("/passwdinit/{user_id}")
+    public Object updateUserPasswd(@PathVariable("user_id") Long user_id) {
+        try {
+            // 비밀번호 초기화
+            userMenegementService.updateUserPasswdInit(user_id);
+            Object response = new Object() {
+                public final String resultmessage = "사용자 비밀번호 초기화 했습니다";
+            };
+            return response;
+        } catch (Exception e) {
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
+        }
+    }
+
+    //사용 or 사용정지
+    @PatchMapping("/useyn/{user_id}")
+    public Object updateUserUseYN(@PathVariable("user_id") Long user_id) {
+        try {
+            userMenegementService.updateUserUseYN(user_id);
+            Object response = new Object() {
+                public final String resultmessage = "사용자 사용여부를 변경 했습니다";
+            };
+            return response;
+        } catch (Exception e) {
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
+        }
+    }
+
+
+
 
 }

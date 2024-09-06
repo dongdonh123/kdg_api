@@ -67,7 +67,7 @@
                 and user_account_id LIKE CONCAT('%', #{user_account_id}, '%')
             </if>
         </where>
-        ORDER BY create_dt
+        ORDER BY create_dt, user_name
         OFFSET #{page_no} LIMIT #{page_cnt};
     </select>
 
@@ -152,7 +152,7 @@
         create_dt)
         VALUES
         (#{rel_user_role_id},
-        (SELECT MAX(user_id) FROM kdh.tb_user_mgt),
+        #{user_id},
         #{role_id},
         '관리자김동환',
         NOW());
@@ -162,12 +162,6 @@
     <update id="updateUser" parameterType="com.kdg.api.model.UserDTO">
         UPDATE kdh.tb_user_mgt
         <set>
-            <if test="user_name != null">
-                user_name = #{user_name},
-            </if>
-            <if test="user_account_id != null">
-                user_account_id = #{user_account_id},
-            </if>
             <if test="user_use_yn != null">
                 user_use_yn = #{user_use_yn},
             </if>
@@ -206,6 +200,18 @@
         DELETE FROM kdh.tb_rel_user_role
         WHERE user_id = #{user_id};
     </delete>
+
+    <update id="updateUserPasswdInit" parameterType="Long">
+        UPDATE kdh.tb_user_mgt
+            user_passwd = null
+        WHERE user_id = #{user_id}
+    </update>
+
+    <update id="updateUserUseYN" parameterType="Long">
+        UPDATE kdh.tb_user_mgt
+        user_use_yn = 'Y'
+        WHERE user_id = #{user_id}
+    </update>
 
 
 
