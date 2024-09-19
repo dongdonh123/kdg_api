@@ -202,16 +202,30 @@
     </delete>
 
     <update id="updateUserPasswdInit" parameterType="Long">
-        UPDATE kdh.tb_user_mgt
+        UPDATE kdh.tb_user_mgt set
             user_passwd = null
         WHERE user_id = #{user_id}
     </update>
 
-    <update id="updateUserUseYN" parameterType="Long">
-        UPDATE kdh.tb_user_mgt
+    <update id="updateUserUseY" parameterType="Long">
+        UPDATE kdh.tb_user_mgt set
         user_use_yn = 'Y'
         WHERE user_id = #{user_id}
     </update>
+
+    <update id="updateUserUseN" parameterType="Long">
+        UPDATE kdh.tb_user_mgt set
+        user_use_yn = 'N'
+        WHERE user_id = #{user_id}
+    </update>
+
+    <select id="getUserUseYN" parameterType="long" resultType="String">
+        SELECT
+        user_use_yn
+        FROM kdh.tb_user_mgt
+        where user_id = #{user_id};
+    </select>
+
 
 
 

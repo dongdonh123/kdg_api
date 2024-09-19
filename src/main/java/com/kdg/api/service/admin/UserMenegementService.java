@@ -7,12 +7,8 @@ import com.kdg.api.model.RoleDTO;
 import com.kdg.api.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.management.relation.Role;
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserMenegementService {
@@ -112,8 +108,12 @@ public class UserMenegementService {
         if (userMenegementMapper.findUserId(userId) == null) {
             throw new IllegalArgumentException("UserId를 찾을 수 없습니다. ID: " + userId);
         }
-        //사용자 정보 수정
-        userMenegementMapper.updateUserUseYN(userId);
+        //사용자 기존의 사용여부 가져오기
+        String use_yn = userMenegementMapper.getUserUseYN(userId);
+        if(use_yn.equals("Y")){userMenegementMapper.updateUserUseN(userId);}
+        else if(use_yn.equals("N")){userMenegementMapper.updateUserUseY(userId);}
+
+
     }
 
 

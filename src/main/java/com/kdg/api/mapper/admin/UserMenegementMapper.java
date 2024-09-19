@@ -43,5 +43,11 @@ public interface UserMenegementMapper {
     void updateUserPasswdInit(Long user_id);
 
     // 사용자 사용여부 변경
-    void updateUserUseYN(Long user_id);
+    void updateUserUseY(Long user_id);
+
+    // 사용자 사용여부 변경
+    void updateUserUseN(Long user_id);
+
+    //사용자 사용여부 가져오기
+    String getUserUseYN(Long user_id);
 }
