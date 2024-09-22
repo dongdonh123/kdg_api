@@ -1,5 +1,8 @@
 package com.kdg.api.model;
 
+
+import com.kdg.config.AccountLockedException;
+import com.kdg.config.CustomUsernameNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,7 +26,7 @@ public class LoginDTO implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "ADMIN 권한";
+                return "ROLE_BOARD";
             }
         });
         return collection;
@@ -50,7 +53,11 @@ public class LoginDTO implements UserDetails {
     //계정이 잠겨 있지 않은지를 확인하는 메서드입니다. true를 반환하면 계정이 잠겨있지 않음을 의미합니다.
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        // 패스워드 틀린횟수 5 이상인지
+        if (Integer.parseInt(userDTO.getUser_passwd_fail_cnt()) >= 5) {
+            throw new AccountLockedException("패스워드 틀린 횟수가 5회 이상입니다. 관리자에게 문의하세요.");
+        }
+        return true; // 잠겨있지 않으면 true 반환
     }
 
     //자격 증명(비밀번호)이 만료되지 않았는지를 확인하는 메서드입니다. (나는 비밀번호 만료 기능은 하지 않을것임)

@@ -13,10 +13,26 @@
     <select id="findUserName" parameterType="String" resultMap="UserResultMap">
         SELECT
         user_account_id,
-        user_passwd
+        user_passwd,
+        user_passwd_fail_cnt
         FROM kdh.tb_user_mgt
         where user_account_id = #{username};
     </select>
+
+    <update id="updateFailedAttempts" parameterType="String" >
+        UPDATE kdh.tb_user_mgt set
+        user_passwd_fail_cnt = (CAST(user_passwd_fail_cnt AS integer) + 1)
+        WHERE user_account_id = #{username}
+        RETURNING user_passwd_fail_cnt;
+    </update>
+
+    <select id="selectFailedAttempts" parameterType="String" resultType="Long">
+        SELECT user_passwd_fail_cnt::integer
+        FROM kdh.tb_user_mgt
+        WHERE user_account_id = #{username};
+    </select>
+
+
 
 
 </mapper>

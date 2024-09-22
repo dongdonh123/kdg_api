@@ -7,4 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LoginMapper {
 
     UserDTO findUserName(String username);
+
+    void updateFailedAttempts(String username);
+    Long selectFailedAttempts(String username);
 }
