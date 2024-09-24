@@ -1,6 +1,8 @@
 package com.kdg.config;
 
-public class AccountLockedException extends RuntimeException {
+import org.springframework.security.core.AuthenticationException;
+
+public class AccountLockedException extends RuntimeException  {
     public AccountLockedException(String message) {
         super(message);
     }

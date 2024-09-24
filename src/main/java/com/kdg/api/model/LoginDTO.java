@@ -3,6 +3,8 @@ package com.kdg.api.model;
 
 import com.kdg.config.AccountLockedException;
 import com.kdg.config.CustomUsernameNotFoundException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -55,7 +57,7 @@ public class LoginDTO implements UserDetails {
     public boolean isAccountNonLocked() {
         // 패스워드 틀린횟수 5 이상인지
         if (Integer.parseInt(userDTO.getUser_passwd_fail_cnt()) >= 5) {
-            throw new AccountLockedException("패스워드 틀린 횟수가 5회 이상입니다. 관리자에게 문의하세요.");
+            throw new AccountLockedException("패스워드 오입력 5회로 계정이 잠겼습니다. 관리자에게 문의하세요.");
         }
         return true; // 잠겨있지 않으면 true 반환
     }

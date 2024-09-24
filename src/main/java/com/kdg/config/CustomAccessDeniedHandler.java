@@ -17,7 +17,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex)
-            throws IOException, ServletException {
+            throws IOException {
 
         // 요청한 URI 확인
         String requestURI = request.getRequestURI();
