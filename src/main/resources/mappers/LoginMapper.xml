@@ -8,13 +8,16 @@
     <resultMap id="UserResultMap" type="com.kdg.api.model.UserDTO">
         <id property="user_account_id" column="user_account_id"/>
         <result property="user_passwd" column="user_passwd"/>
+        <result property="user_passwd_fail_cnt" column="user_passwd_fail_cnt"/>
+        <result property="user_use_yn" column="user_use_yn"/>
     </resultMap>
 
     <select id="findUserName" parameterType="String" resultMap="UserResultMap">
         SELECT
         user_account_id,
         user_passwd,
-        user_passwd_fail_cnt
+        user_passwd_fail_cnt,
+        user_use_yn
         FROM kdh.tb_user_mgt
         where user_account_id = #{username};
     </select>
@@ -31,6 +34,13 @@
         FROM kdh.tb_user_mgt
         WHERE user_account_id = #{username};
     </select>
+
+    <select id="selectUseYn" parameterType="String" resultType="String">
+        SELECT user_use_yn
+        FROM kdh.tb_user_mgt
+        WHERE user_account_id = #{username};
+    </select>
+
 
 
 

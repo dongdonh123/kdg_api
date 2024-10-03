@@ -10,4 +10,5 @@ public interface LoginMapper {
 
     void updateFailedAttempts(String username);
     Long selectFailedAttempts(String username);
+    String selectUseYn(String username);
 }

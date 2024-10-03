@@ -99,7 +99,6 @@ public class SecurityConfig {
                         .accessDeniedHandler(accessDeniedHandler) // 커스텀 AccessDeniedHandler 등록
 
                 );
-
         //JWTFilter 등록
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
