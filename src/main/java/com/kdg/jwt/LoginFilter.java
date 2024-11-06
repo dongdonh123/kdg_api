@@ -5,6 +5,7 @@ import com.kdg.api.model.LoginDTO;
 import com.kdg.api.model.UserDTO;
 import com.kdg.exception.AccountDisabledException;
 import com.kdg.exception.AccountLockedException;
+import com.kdg.exception.PasswordNullException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -94,7 +95,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         // 사용자 ID 가져오기 (요청에서)
         String username = request.getParameter("username"); // 실제 사용자의 ID가 어떻게 전달되는지에 따라 조정
-
         if (failed instanceof AccountLockedException) {
             message = "패스워드 5회 오입력으로 인해 계정이 잠겼습니다. 관리자에게 문의하세요.";
         }else if(failed instanceof AccountDisabledException) {
@@ -112,8 +112,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                     message = "패스워드가 맞지않습니다. 패스워드 틀린 횟수 : " + failcnt;
                 }
             }
+        }else if(failed instanceof PasswordNullException){
+            message = "패스워드가 설정되지 않았습니다. password 설정이 필요합니다.";
         }else{
-            message = "로그인실패";
+            message = "지정되지 않은 케이스 로그인 실패";
         }
 
 

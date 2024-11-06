@@ -3,6 +3,7 @@ package com.kdg.api.model;
 
 import com.kdg.exception.AccountDisabledException;
 import com.kdg.exception.AccountLockedException;
+import com.kdg.exception.PasswordNullException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -38,6 +39,11 @@ public class LoginDTO implements UserDetails {
     @Override
     public String getPassword() {
         System.out.println("Login STEP3 : 로그인DTO 4");
+
+        // null 체크 수행
+        if(userDTO.getUser_passwd() == null || userDTO.getUser_passwd().equals("")) {
+            throw new PasswordNullException("패스워드가 null이거나 빈 값입니다");
+        }
         return userDTO.getUser_passwd();
     }
 
@@ -61,7 +67,7 @@ public class LoginDTO implements UserDetails {
         System.out.println("Login STEP3 : 로그인DTO 1");
         // 패스워드 틀린횟수 5 이상인지 확인
         if (Integer.parseInt(userDTO.getUser_passwd_fail_cnt()) >= 5) {
-            throw new AccountLockedException("계정이 잠겼습니다. 관리자에게 문의하세요.");
+            throw new AccountLockedException("계정이 잠김");
         }
         return true; // 계정이 잠겨있지 않으면 true 반환
     }
