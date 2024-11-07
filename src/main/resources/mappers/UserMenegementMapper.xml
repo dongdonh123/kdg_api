@@ -226,6 +226,13 @@
         where user_id = #{user_id};
     </select>
 
+    <select id="verificationUserId" parameterType="long" resultType="String">
+        SELECT user_account_id
+        FROM kdh.tb_user_mgt
+        WHERE user_id = #{user_id};
+    </select>
+
+
 
 
 

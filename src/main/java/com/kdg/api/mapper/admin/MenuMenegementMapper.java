@@ -30,5 +30,7 @@ public interface MenuMenegementMapper {
     //메뉴데이터 상세조회
     MenuDTO getMenuDetail(Long menuId);
 
+    //
+
 
 }

@@ -164,6 +164,27 @@ public class UserMenegementController {
         }
     }
 
+    //비밀번호 설정
+    @PutMapping("/changepassword/{user_id}")
+    public Object changePassword(@PathVariable("user_id") Long user_id, @RequestBody UserDTO userDTO) {
+        try {
+
+            String password = userDTO.getUser_passwd();
+            String user_account_id = userDTO.getUser_account_id();
+
+            userDTO.setUser_id((long) user_id.intValue());
+            userMenegementService.changePassword(user_id,password,user_account_id);
+            Object response = new Object() {
+                public final String resultmessage = "암호 변경이 성공하였습니다. 변경된 암호로 로그인 하시기 바랍니다.";
+            };
+            return response;
+        } catch (Exception e) {
+            return new Object() {
+                public final String resultmessage = "요청을 처리하는 동안 오류가 발생했습니다."+ e.getMessage();
+            };
+        }
+    }
+
 
 
 

@@ -15,11 +15,13 @@ public class UserMenegementService {
 
     private final UserMenegementMapper userMenegementMapper;
     private final CommonMapper commonMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserMenegementService(UserMenegementMapper userMenegementMapper, CommonMapper commonMapper){
+    public UserMenegementService(UserMenegementMapper userMenegementMapper, CommonMapper commonMapper, BCryptPasswordEncoder bCryptPasswordEncoder){
         this.userMenegementMapper =userMenegementMapper;
         this.commonMapper = commonMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     //리스트데이터
@@ -114,6 +116,18 @@ public class UserMenegementService {
         else if(use_yn.equals("N")){userMenegementMapper.updateUserUseY(userId);}
 
 
+    }
+
+    //사용자 패스워드 설정
+    public void changePassword(Long userId, String password, String user_account_id) {
+
+        // 1. ID와 username이 일치하는지 확인
+        if (userMenegementMapper.verificationUserId(userId).equals(user_account_id)) {
+            throw new IllegalArgumentException("검증오류로 인해 패스워드재설정을 실패했습니다. user_id와 user_account_id가 다릅니다.");
+        }
+        // 2. password 암호화해서 업데이트하기
+        String encryption_password = bCryptPasswordEncoder.encode(password);
+        userMenegementMapper.changePassword(userId,userDTO);
     }
 
 
