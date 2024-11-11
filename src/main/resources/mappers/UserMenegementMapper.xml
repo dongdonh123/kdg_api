@@ -232,6 +232,12 @@
         WHERE user_id = #{user_id};
     </select>
 
+    <update id="changePassword" >
+        update kdh.tb_user_mgt set
+        user_passwd = #{encryption_password}
+        where user_id = #{user_id}
+    </update>
+
 
 
 

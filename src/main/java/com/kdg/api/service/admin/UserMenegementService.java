@@ -127,7 +127,8 @@ public class UserMenegementService {
         }
         // 2. password 암호화해서 업데이트하기
         String encryption_password = bCryptPasswordEncoder.encode(password);
-        userMenegementMapper.changePassword(userId,userDTO);
+
+        userMenegementMapper.changePassword(userId,encryption_password);
     }
 
 

@@ -53,5 +53,8 @@ public interface UserMenegementMapper {
 
     String verificationUserId(Long user_id);
 
+    void changePassword(@Param("user_id") Long user_id, @Param("encryption_password") String encryption_password);
+
+
 
 }

@@ -119,7 +119,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
 
 
-        response.getWriter().write("{\"status\": " + response.getStatus() + ", \"message\": \"" + message + "\"}");
+        response.getWriter().write("{\"status\": " + response.getStatus()
+                + ", \"message\": \"" + message + "\""
+                + ", \"user_id\": \"" + "5" + "\"" +"}"
+        );
     }
 
     private Long updateFailedLoginAttempts(String username) {
