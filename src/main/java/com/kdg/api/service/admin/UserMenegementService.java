@@ -122,7 +122,7 @@ public class UserMenegementService {
     public void changePassword(Long userId, String password, String user_account_id) {
 
         // 1. ID와 username이 일치하는지 확인
-        if (userMenegementMapper.verificationUserId(userId).equals(user_account_id)) {
+        if (!userMenegementMapper.verificationUserId(userId).equals(user_account_id)) {
             throw new IllegalArgumentException("검증오류로 인해 패스워드재설정을 실패했습니다. user_id와 user_account_id가 다릅니다.");
         }
         // 2. password 암호화해서 업데이트하기

@@ -92,6 +92,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json; charset=UTF-8");
         String message = "";
+        long userId = 0;
+        boolean passwordSettingYN = false;
 
         // 사용자 ID 가져오기 (요청에서)
         String username = request.getParameter("username"); // 실제 사용자의 ID가 어떻게 전달되는지에 따라 조정
@@ -114,15 +116,22 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             }
         }else if(failed instanceof PasswordNullException){
             message = "패스워드가 설정되지 않았습니다. password 설정이 필요합니다.";
+            passwordSettingYN = true;
+            userId = selectUserID(username);
+
         }else{
             message = "지정되지 않은 케이스 로그인 실패";
         }
 
-
         response.getWriter().write("{\"status\": " + response.getStatus()
                 + ", \"message\": \"" + message + "\""
-                + ", \"user_id\": \"" + "5" + "\"" +"}"
         );
+        if(passwordSettingYN){
+            response.getWriter().write(", \"user_id\": \"" + userId + "\"" );
+
+        }
+        response.getWriter().write("}");
+
     }
 
     private Long updateFailedLoginAttempts(String username) {
@@ -131,12 +140,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         return loginMapper.selectFailedAttempts(username);
     }
 
-    private long selectFailedLoginAttempts(String username) {
-        return loginMapper.selectFailedAttempts(username);
-    }
-
-    private String selectUseYn(String username) {
-        return loginMapper.selectUseYn(username);
+    private long selectUserID(String username) {
+        return loginMapper.selectUserID(username);
     }
 
 

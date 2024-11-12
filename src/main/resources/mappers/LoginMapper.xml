@@ -35,8 +35,8 @@
         WHERE user_account_id = #{username};
     </select>
 
-    <select id="selectUseYn" parameterType="String" resultType="String">
-        SELECT user_use_yn
+    <select id="selectUserID" parameterType="String" resultType="Long">
+        SELECT user_id
         FROM kdh.tb_user_mgt
         WHERE user_account_id = #{username};
     </select>

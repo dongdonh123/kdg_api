@@ -168,10 +168,8 @@ public class UserMenegementController {
     @PutMapping("/changepassword/{user_id}")
     public Object changePassword(@PathVariable("user_id") Long user_id, @RequestBody UserDTO userDTO) {
         try {
-
             String password = userDTO.getUser_passwd();
             String user_account_id = userDTO.getUser_account_id();
-
             userDTO.setUser_id((long) user_id.intValue());
             userMenegementService.changePassword(user_id,password,user_account_id);
             Object response = new Object() {

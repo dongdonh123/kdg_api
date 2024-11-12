@@ -90,7 +90,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/setpasswd").permitAll() //모든 권한을 허용함 (인증도 없어도 가능)
+                        .requestMatchers("/login", "api/admin/user/changepassword/*").permitAll() //모든 권한을 허용함 (인증도 없어도 가능)
                         .requestMatchers("/board/**").hasRole("BOARD") // 어드민ㄱ 경로는 어드만 권한만 허용함
                         .requestMatchers("/admin/**").hasRole("ADMIN") // 어드민ㄱ 경로는 어드만 권한만 허용함
                         .anyRequest().authenticated()) //그외의 요청에서는 로그인한 사용자만 접근 허용함
