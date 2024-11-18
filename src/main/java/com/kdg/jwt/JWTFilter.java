@@ -40,6 +40,7 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         System.out.println("authorization now");
+        System.out.println(authorization);
         //Bearer 부분 제거 후 순수 토큰만 획득
         String token = authorization.split(" ")[1];
 

@@ -41,6 +41,12 @@
         WHERE user_account_id = #{username};
     </select>
 
+    <update id="updatePasswdFailCnt" >
+        update kdh.tb_user_mgt set
+        user_passwd_fail_cnt = 0
+        where user_account_id = #{username}
+    </update>
+
 
 
 

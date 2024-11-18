@@ -74,6 +74,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String role = auth.getAuthority();
 
 
+        //passwdfailcnt를 0 으로 업데이트
+        updatePasswdFailCnt(username);
+        System.out.println(username + "사용자 패스워드틀린횟수 0으로 업데이트 완료" );
+
+
 
         String token = jwtUtil.createJwt(username, role, 60*60*1000L); // 60*60*1000L = 1시간
 
@@ -140,8 +145,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         return loginMapper.selectFailedAttempts(username);
     }
 
+    //user_account_id로 user_id를 찾는 함수
     private long selectUserID(String username) {
         return loginMapper.selectUserID(username);
+    }
+
+    //passwd_fail_cnt를 0으로 업데이트하는 함수
+    private void updatePasswdFailCnt(String username) {
+        loginMapper.updatePasswdFailCnt(username);
     }
 
 

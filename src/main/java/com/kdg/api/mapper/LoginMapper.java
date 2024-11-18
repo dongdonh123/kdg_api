@@ -12,5 +12,7 @@ public interface LoginMapper {
     Long selectFailedAttempts(String username);
     Long selectUserID(String username);
 
+    void updatePasswdFailCnt(String username);
+
 
 }
